@@ -1,6 +1,8 @@
 package com.nonier.cliniccore.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,6 +10,8 @@ import java.util.List;
 
 @Data
 @Entity
+@EqualsAndHashCode(exclude = "userRoles")
+@ToString(exclude = "userRoles")
 @Table(name = "role")
 public class Role {
 

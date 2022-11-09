@@ -1,6 +1,8 @@
 package com.nonier.cliniccore.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,6 +10,8 @@ import java.util.List;
 
 @Data
 @Entity
+@EqualsAndHashCode(exclude = "doctor")
+@ToString(exclude = "doctor")
 @Table(name = "users")
 public class User {
 
@@ -27,6 +31,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<UserRole> userRoles = new ArrayList<>();
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Doctor doctor;
 }
