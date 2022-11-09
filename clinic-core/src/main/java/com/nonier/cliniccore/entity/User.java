@@ -1,8 +1,6 @@
 package com.nonier.cliniccore.entity;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,6 +15,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
     @OneToMany(mappedBy = "user")
-    private List<UserRoles> userRoles = new ArrayList<>();
+    private List<UserRole> userRoles = new ArrayList<>();
+
+    @OneToOne(mappedBy = "user")
+    private Doctor doctor;
 }

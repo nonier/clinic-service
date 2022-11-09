@@ -8,8 +8,8 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "role")
-public class Role {
+@Table(name = "specialization")
+public class Specialization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +18,7 @@ public class Role {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "role")
-    private List<UserRole> userRoles = new ArrayList<>();
+    @OneToMany(mappedBy = "specialization")
+    private List<DoctorSpecialization> doctorSpecializations = new ArrayList<>();
+
 }
