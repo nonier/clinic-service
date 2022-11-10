@@ -33,7 +33,7 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor")
     private List<DoctorSpecialization> doctorSpecializations = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 }
