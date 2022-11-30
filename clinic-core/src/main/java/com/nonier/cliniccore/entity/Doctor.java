@@ -1,15 +1,16 @@
 package com.nonier.cliniccore.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = "doctorSpecializations")
 @ToString(exclude = "doctorSpecializations")
 @Table(name = "doctor")
@@ -30,7 +31,7 @@ public class Doctor {
     @Column(name = "rank", nullable = false)
     private Rank rank;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor", orphanRemoval = true)
     private List<DoctorSpecialization> doctorSpecializations = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
