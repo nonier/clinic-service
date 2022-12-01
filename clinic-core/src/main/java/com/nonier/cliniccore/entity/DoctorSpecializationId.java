@@ -1,16 +1,16 @@
 package com.nonier.cliniccore.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Getter
+@Setter
 @Embeddable
-@NoArgsConstructor
-@AllArgsConstructor
+@EqualsAndHashCode
 public class DoctorSpecializationId implements Serializable {
 
     @Column(name = "doctor_id")

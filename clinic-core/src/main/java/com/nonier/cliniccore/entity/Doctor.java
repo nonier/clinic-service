@@ -34,7 +34,7 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor", orphanRemoval = true)
     private List<DoctorSpecialization> doctorSpecializations = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 }

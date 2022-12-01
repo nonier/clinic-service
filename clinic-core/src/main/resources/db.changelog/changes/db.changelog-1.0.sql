@@ -30,7 +30,8 @@ CREATE TABLE role(
 --changeset dilyin:4
 CREATE TABLE user_roles(
     user_id BIGINT REFERENCES users(id),
-    role_id BIGINT REFERENCES role(id)
+    role_id BIGINT REFERENCES role(id),
+    PRIMARY KEY (user_id, role_id)
 );
 --rollback DROP TABLE user_roles;
 
@@ -44,6 +45,7 @@ CREATE TABLE specialization(
 --changeset dilyin:6
 CREATE TABLE doctor_specialization(
     doctor_id BIGINT REFERENCES doctor(id),
-    specialization_id BIGINT REFERENCES specialization(id)
+    specialization_id BIGINT REFERENCES specialization(id),
+    PRIMARY KEY (doctor_id, specialization_id)
 );
 --rollback DROP TABLE doctor_specialization;

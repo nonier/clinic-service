@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {UserMapper.class, SpecializationMapper.class, DoctorMapperUtil.class})
+        uses = {SpecializationMapper.class, UserMapper.class, DoctorMapperUtil.class})
 public interface DoctorMapper {
 
     @Mapping(target = "id", source = "doctor.id")
@@ -22,6 +22,6 @@ public interface DoctorMapper {
     @Mapping(target = "ageGroup", source = "dto.ageGroup")
     @Mapping(target = "workExperience", source = "dto.workExperience")
     @Mapping(target = "rank", source = "dto.rank")
-    @Mapping(target = "user", qualifiedBy = DoctorMapperUtil.UserByDoctorUpdateDto.class)
+    @Mapping(target = "user", source = "dto", qualifiedBy = DoctorMapperUtil.UserByDoctorUpdateDto.class)
     Doctor doctorUpdateDto2Doctor(DoctorUpdateDto dto);
 }

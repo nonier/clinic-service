@@ -24,6 +24,7 @@ public class SecurityConfig {
                 .disable()
                 .authorizeRequests( req ->
                         req.antMatchers("/users/**").hasAuthority("ADMIN")
+                                .antMatchers("/doctors/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .antMatchers("/role/**").hasAuthority("ADMIN")
                                 .antMatchers("/login").permitAll()
                                 .anyRequest().denyAll())

@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class DoctorSpecialization {
 
     @EmbeddedId
-    private DoctorSpecializationId id;
+    @Builder.Default
+    private DoctorSpecializationId id = new DoctorSpecializationId();
 
     @MapsId("doctorId")
     @ManyToOne(fetch = FetchType.LAZY)
