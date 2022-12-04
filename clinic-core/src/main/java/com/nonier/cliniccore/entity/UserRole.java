@@ -1,16 +1,23 @@
 package com.nonier.cliniccore.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "user_roles")
 public class UserRole {
 
     @EmbeddedId
-    private UserRoleId userRoleId;
+    @Builder.Default
+    private UserRoleId userRoleId = new UserRoleId();
 
     @MapsId("userId")
     @ManyToOne(fetch = FetchType.LAZY)

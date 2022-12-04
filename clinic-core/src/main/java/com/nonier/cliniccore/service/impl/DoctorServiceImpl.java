@@ -4,7 +4,6 @@ import com.nonier.cliniccore.dto.DoctorDto;
 import com.nonier.cliniccore.dto.DoctorUpdateDto;
 import com.nonier.cliniccore.entity.Doctor;
 import com.nonier.cliniccore.entity.DoctorSpecialization;
-import com.nonier.cliniccore.entity.DoctorSpecializationId;
 import com.nonier.cliniccore.mapper.DoctorMapper;
 import com.nonier.cliniccore.repository.DoctorRepository;
 import com.nonier.cliniccore.repository.DoctorSpecializationRepository;
@@ -14,9 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
