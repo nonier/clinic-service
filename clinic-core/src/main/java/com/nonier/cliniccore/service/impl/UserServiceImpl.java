@@ -1,6 +1,6 @@
 package com.nonier.cliniccore.service.impl;
 
-import com.nonier.cliniccore.dto.UpdateUserDto;
+import com.nonier.cliniccore.dto.UserUpdateDto;
 import com.nonier.cliniccore.dto.UserDto;
 import com.nonier.cliniccore.entity.User;
 import com.nonier.cliniccore.entity.UserRole;
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public UserDto create(UpdateUserDto dto) {
+    public UserDto create(UserUpdateDto dto) {
         User user = userMapper.updateUserDto2User(dto);
         userRepository.save(user);
         List<UserRole> userRoles = dto.getRoleIds()
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public UserDto update(Long id, UpdateUserDto dto) {
+    public UserDto update(Long id, UserUpdateDto dto) {
         User newUser = userMapper.updateUserDto2User(dto);
         User oldUser = userRepository.getReferenceById(id);
         newUser.setId(oldUser.getId());

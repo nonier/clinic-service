@@ -5,6 +5,7 @@ import com.nonier.cliniccore.dto.DoctorUpdateDto;
 import com.nonier.cliniccore.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,13 +32,13 @@ public class DoctorController {
     }
 
     @PostMapping
-    public ResponseEntity<DoctorDto> create(@RequestBody DoctorUpdateDto dto) {
+    public ResponseEntity<DoctorDto> create(@Validated @RequestBody DoctorUpdateDto dto) {
         return ResponseEntity.ok(doctorService.create(dto));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<DoctorDto> update(@PathVariable Long id,
-                                            @RequestBody DoctorUpdateDto dto) {
+                                            @Validated @RequestBody DoctorUpdateDto dto) {
         return ResponseEntity.ok(doctorService.update(id, dto));
     }
 }

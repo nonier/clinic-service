@@ -1,6 +1,6 @@
 package com.nonier.cliniccore.mapper;
 
-import com.nonier.cliniccore.dto.UpdateUserDto;
+import com.nonier.cliniccore.dto.UserUpdateDto;
 import com.nonier.cliniccore.dto.UserDto;
 import com.nonier.cliniccore.entity.User;
 import org.mapstruct.Mapper;
@@ -23,5 +23,5 @@ public interface UserMapper {
     @Mapping(target = "name", source = "dto.name")
     @Mapping(target = "surname", source = "dto.surname")
     @Mapping(target = "password", source = "dto", qualifiedBy = UserMapperUtil.PasswordByUserUpdateDto.class)
-    User updateUserDto2User(UpdateUserDto dto);
+    User updateUserDto2User(UserUpdateDto dto);
 }
