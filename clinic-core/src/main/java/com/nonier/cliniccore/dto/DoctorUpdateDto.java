@@ -2,9 +2,9 @@ package com.nonier.cliniccore.dto;
 
 import com.nonier.cliniccore.entity.AgeGroup;
 import com.nonier.cliniccore.entity.Rank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data

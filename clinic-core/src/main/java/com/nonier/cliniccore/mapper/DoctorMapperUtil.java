@@ -3,12 +3,11 @@ package com.nonier.cliniccore.mapper;
 import com.nonier.cliniccore.dto.DoctorUpdateDto;
 import com.nonier.cliniccore.entity.User;
 import com.nonier.cliniccore.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Named;
 import org.mapstruct.Qualifier;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityNotFoundException;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

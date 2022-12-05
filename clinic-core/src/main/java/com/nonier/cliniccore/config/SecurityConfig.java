@@ -22,11 +22,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf()
                 .disable()
-                .authorizeRequests( req ->
-                        req.antMatchers("/users/**").hasAuthority("ADMIN")
-                                .antMatchers("/doctors/**").hasAnyAuthority("ADMIN", "DOCTOR")
-                                .antMatchers("/role/**").hasAuthority("ADMIN")
-                                .antMatchers("/login").permitAll()
+                .authorizeHttpRequests( req ->
+                        req.requestMatchers("/users/**").hasAuthority("ADMIN")
+                                .requestMatchers("/doctors/**").hasAnyAuthority("ADMIN", "DOCTOR")
+                                .requestMatchers("/role/**").hasAuthority("ADMIN")
+                                .requestMatchers("/login").permitAll()
                                 .anyRequest().denyAll())
                 .formLogin()
                 .and()
