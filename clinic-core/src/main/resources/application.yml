@@ -1,0 +1,36 @@
+#Server
+server:
+  port: 8080
+#Profile
+spring:
+  profiles:
+    active: ${ACTIVE_PROFILE}
+  application:
+    name: core
+  #Database
+  datasource:
+    password: postgres
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/clinic-core
+  jpa:
+    hibernate:
+      ddl-auto: validate
+#Liquibase
+  liquibase:
+    change-log: classpath:db.changelog/db-changelog-master.yaml
+#SpringBootAdmin
+  boot:
+    admin:
+      client:
+        username: ${CLINIC_ADMIN_USERNAME}
+        password: ${CLINIC_ADMIN_PASSWORD}
+#Actuator
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
