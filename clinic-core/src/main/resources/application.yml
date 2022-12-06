@@ -25,6 +25,11 @@ spring:
       client:
         username: ${CLINIC_ADMIN_USERNAME}
         password: ${CLINIC_ADMIN_PASSWORD}
+        instance:
+          metadata:
+            user:
+              name: dummyAdmin
+              password: Usersecret!
 #Actuator
 management:
   endpoint:

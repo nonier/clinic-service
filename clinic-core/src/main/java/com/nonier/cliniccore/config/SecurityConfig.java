@@ -26,10 +26,12 @@ public class SecurityConfig {
                         req.requestMatchers("/users/**").hasAuthority("ADMIN")
                                 .requestMatchers("/doctors/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/role/**").hasAuthority("ADMIN")
-                                .requestMatchers("/actuator/**").permitAll()
+                                .requestMatchers("/actuator/**").authenticated()
                                 .requestMatchers("/login").permitAll()
                                 .anyRequest().denyAll())
                 .formLogin()
+                .and()
+                .httpBasic()
                 .and()
                 .build();
     }
