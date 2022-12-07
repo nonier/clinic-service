@@ -71,4 +71,9 @@ public class DoctorServiceImpl implements DoctorService {
         newDoctor.setDoctorSpecializations(doctorSpecializationRepository.saveAll(doctorSpecializations));
         return doctorMapper.doctor2DoctorDto(doctorRepository.save(newDoctor));
     }
+
+    @Override
+    public void delete(Long id) {
+        doctorRepository.deleteById(id);
+    }
 }

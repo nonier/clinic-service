@@ -31,9 +31,9 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<UserRole> userRoles = new ArrayList<>();
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", orphanRemoval = true)
     private Doctor doctor;
 }

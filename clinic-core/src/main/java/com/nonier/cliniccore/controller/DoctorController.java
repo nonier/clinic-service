@@ -41,4 +41,10 @@ public class DoctorController {
                                             @Validated @RequestBody DoctorUpdateDto dto) {
         return ResponseEntity.ok(doctorService.update(id, dto));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        doctorService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 }
