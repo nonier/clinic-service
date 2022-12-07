@@ -10,8 +10,8 @@ import java.util.List;
 
 @Data
 @Entity
-@EqualsAndHashCode(exclude = "doctor")
-@ToString(exclude = "doctor")
+@EqualsAndHashCode(exclude = {"doctor","userDialogs"})
+@ToString(exclude = {"doctor","userDialogs"})
 @Table(name = "users")
 public class User {
 
@@ -36,4 +36,7 @@ public class User {
 
     @OneToOne(mappedBy = "user", orphanRemoval = true)
     private Doctor doctor;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserDialog> userDialogs = new ArrayList<>();
 }

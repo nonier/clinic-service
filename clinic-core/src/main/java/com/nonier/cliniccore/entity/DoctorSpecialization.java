@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 
 @Data
 @Entity
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "doctor_specialization")
-public class DoctorSpecialization {
+public class DoctorSpecialization implements Serializable {
 
     @EmbeddedId
     @Builder.Default
