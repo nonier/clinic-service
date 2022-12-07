@@ -1,4 +1,4 @@
-package com.nonier.cliniccore.controller.advice;
+package com.nonier.cliniccore.advice;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;

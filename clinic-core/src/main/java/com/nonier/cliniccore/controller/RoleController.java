@@ -4,10 +4,7 @@ import com.nonier.cliniccore.dto.RoleDto;
 import com.nonier.cliniccore.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,15 @@ public class RoleController {
     @GetMapping
     public ResponseEntity<List<RoleDto>> findAll(){
         return ResponseEntity.ok(roleService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RoleDto> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(roleService.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<RoleDto> create(@RequestBody String name) {
+        return ResponseEntity.ok(roleService.create(name));
     }
 }

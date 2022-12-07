@@ -7,4 +7,8 @@ import java.util.List;
 public interface RoleService {
 
     List<RoleDto> findAll();
+
+    RoleDto create(String name);
+
+    RoleDto findById(Long id);
 }
