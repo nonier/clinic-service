@@ -53,4 +53,22 @@ dependencyManagement {
 
 test {
     useJUnitPlatform()
+    def properties = new Properties()
+    def propertiesFile = file("../.env")
+    if (propertiesFile.exists()) {
+        properties.load(propertiesFile.newDataInputStream())
+    }
+    properties.forEach {
+        key,value -> environment key, value
+    }
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes "Main-Class": "com/nonier/cliniccore/ClinicCoreApplication.java"
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

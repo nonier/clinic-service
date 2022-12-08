@@ -12,6 +12,8 @@ services:
     build:
       context:
         ./clinic-core
+    ports:
+      - "8080:8080"
     depends_on:
       - postgres
       - admin
@@ -19,6 +21,8 @@ services:
       - .env
   admin:
     container_name: clinic-admin
+    ports:
+      - "8085:8085"
     build:
       context:
         ./clinic-admin

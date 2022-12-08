@@ -3,3 +3,7 @@ spring:
     admin:
       client:
         url: http://localhost:8085
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB}
+  jpa:
+    show-sql: true

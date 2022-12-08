@@ -2,4 +2,6 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:8085
+        url: http://admin:8085
+  datasource:
+    url: jdbc:postgresql://postgres:5432/${POSTGRES_DB}

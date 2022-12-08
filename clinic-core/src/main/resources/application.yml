@@ -9,10 +9,9 @@ spring:
     name: core
   #Database
   datasource:
-    password: postgres
-    username: postgres
+    password: ${POSTGRES_USER}
+    username: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/clinic-core
   jpa:
     hibernate:
       ddl-auto: validate
