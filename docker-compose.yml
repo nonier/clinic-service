@@ -7,3 +7,20 @@ services:
       - "5432:5432"
     env_file:
       - .env
+  core:
+    container_name: clinic-core
+    build:
+      context:
+        ./clinic-core
+    depends_on:
+      - postgres
+      - admin
+    env_file:
+      - .env
+  admin:
+    container_name: clinic-admin
+    build:
+      context:
+        ./clinic-admin
+    env_file:
+      - .env
