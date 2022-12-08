@@ -3,6 +3,7 @@ package com.nonier.cliniccore.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -22,5 +23,9 @@ public class Message    {
 
     @Column(name = "text")
     private String text;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_from", referencedColumnName = "id")
+    private User userFrom;
 
 }
