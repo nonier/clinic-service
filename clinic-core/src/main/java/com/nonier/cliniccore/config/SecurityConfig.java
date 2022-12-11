@@ -25,6 +25,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests( req ->
                         req.requestMatchers("/users/**").hasAuthority("ADMIN")
                                 .requestMatchers("/doctors/**").hasAnyAuthority("ADMIN", "DOCTOR")
+                                .requestMatchers("/messages/**").hasAnyAuthority("ADMIN", "DOCTOR")
+                                .requestMatchers("/dialogs/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/role/**").hasAuthority("ADMIN")
                                 .requestMatchers("/actuator/**").authenticated()
                                 .requestMatchers("/login").permitAll()

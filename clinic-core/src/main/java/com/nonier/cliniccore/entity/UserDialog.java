@@ -1,18 +1,20 @@
 package com.nonier.cliniccore.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = "dialog")
 @ToString(exclude = "dialog")
 @Table(name = "user_dialog")
 public class UserDialog {
 
     @EmbeddedId
+    @Builder.Default
     private UserDialogId userDialogId = new UserDialogId();
 
     @MapsId("userId")

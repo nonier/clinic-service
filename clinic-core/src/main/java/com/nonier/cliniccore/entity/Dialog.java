@@ -19,7 +19,7 @@ public class Dialog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "dialog")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dialog")
     private List<UserDialog> userDialogs = new ArrayList<>();
 
     @OneToMany(mappedBy = "dialog", orphanRemoval = true)

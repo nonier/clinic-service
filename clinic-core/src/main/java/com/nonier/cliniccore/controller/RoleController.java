@@ -2,7 +2,7 @@ package com.nonier.cliniccore.controller;
 
 import com.nonier.cliniccore.dto.RoleDto;
 import com.nonier.cliniccore.service.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,14 +10,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/roles")
+@RequiredArgsConstructor
 public class RoleController {
 
     private final RoleService roleService;
-
-    @Autowired
-    public RoleController(RoleService roleService) {
-        this.roleService = roleService;
-    }
 
     @GetMapping
     public ResponseEntity<List<RoleDto>> findAll(){

@@ -3,7 +3,7 @@ package com.nonier.cliniccore.controller;
 import com.nonier.cliniccore.dto.DoctorDto;
 import com.nonier.cliniccore.dto.DoctorUpdateDto;
 import com.nonier.cliniccore.service.DoctorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/doctors")
+@RequiredArgsConstructor
 public class DoctorController {
 
     private final DoctorService doctorService;
-
-    @Autowired
-    public DoctorController(DoctorService doctorService) {
-        this.doctorService = doctorService;
-    }
 
     @GetMapping
     public ResponseEntity<List<DoctorDto>> findAll(){
