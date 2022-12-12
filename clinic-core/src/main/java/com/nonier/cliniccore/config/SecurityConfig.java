@@ -24,10 +24,11 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests( req ->
                         req.requestMatchers("/users/**").hasAuthority("ADMIN")
+                                .requestMatchers("/role/**").hasAuthority("ADMIN")
                                 .requestMatchers("/doctors/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/messages/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/dialogs/**").hasAnyAuthority("ADMIN", "DOCTOR")
-                                .requestMatchers("/role/**").hasAuthority("ADMIN")
+                                .requestMatchers("/reviews/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/actuator/**").authenticated()
                                 .requestMatchers("/login").permitAll()
                                 .anyRequest().denyAll())

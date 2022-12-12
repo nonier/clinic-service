@@ -5,13 +5,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
-@EqualsAndHashCode(exclude = {"doctor","userDialogs"})
-@ToString(exclude = {"doctor","userDialogs"})
+@EqualsAndHashCode(exclude = {"doctor","userDialogs", "reviews"})
+@ToString(exclude = {"doctor","userDialogs", "reviews"})
 @Table(name = "users")
 public class User {
 
@@ -31,6 +32,9 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
+    @Column(name = "birth_date")
+    private LocalDate localDate;
+
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<UserRole> userRoles = new ArrayList<>();
 
@@ -39,4 +43,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<UserDialog> userDialogs = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 }

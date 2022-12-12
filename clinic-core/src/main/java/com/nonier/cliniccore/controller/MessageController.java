@@ -19,7 +19,6 @@ public class MessageController {
 
     public final MessageService messageService;
 
-
     @GetMapping
     public ResponseEntity<Page<MessageDto>> findAll(Pageable pageable) {
         return ResponseEntity.ok(messageService.findAll(pageable));

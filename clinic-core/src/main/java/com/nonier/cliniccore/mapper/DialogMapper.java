@@ -13,6 +13,6 @@ public interface DialogMapper {
 
     @Mapping(target = "id", source = "dialog.id")
     @Mapping(target = "users", source = "dialog", qualifiedBy = DialogMapperUtil.UsersByDialog.class)
-    @Mapping(target = "messages", source = "messages")
+    @Mapping(target = "messages", source = "dialog.messages")
     DialogDto dialog2DialogDto(Dialog dialog);
 }
