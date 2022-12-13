@@ -11,8 +11,8 @@ import org.mapstruct.MappingConstants;
 )
 public interface DialogMapper {
 
-    @Mapping(target = "id", source = "dialog.id")
-    @Mapping(target = "users", source = "dialog", qualifiedBy = DialogMapperUtil.UsersByDialog.class)
-    @Mapping(target = "messages", source = "dialog.messages")
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "users", source = "userDialogs", qualifiedBy = DialogMapperUtil.UsersByUserDialogs.class)
+    @Mapping(target = "messages", source = "messages")
     DialogDto dialog2DialogDto(Dialog dialog);
 }

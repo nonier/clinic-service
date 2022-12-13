@@ -1,6 +1,5 @@
 package com.nonier.cliniccore.mapper;
 
-import com.nonier.cliniccore.dto.MessageUpdateDto;
 import com.nonier.cliniccore.dto.UserDto;
 import com.nonier.cliniccore.entity.Dialog;
 import com.nonier.cliniccore.entity.UserDialog;
@@ -24,9 +23,9 @@ public class DialogMapperUtil {
     private final UserMapper userMapper;
     private final DialogRepository dialogRepository;
 
-    @UsersByDialog
-    public List<UserDto> usersByDialog(Dialog dialog) {
-        return dialog.getUserDialogs()
+    @UsersByUserDialogs
+    public List<UserDto> usersByDialog(List<UserDialog> userDialogs) {
+        return userDialogs
                 .stream()
                 .map(UserDialog::getUser)
                 .map(userMapper::user2UserDto)
@@ -34,7 +33,7 @@ public class DialogMapperUtil {
     }
 
     @DialogByDialogId
-    public Dialog dialogByDialogId (Long id) {
+    public Dialog dialogByDialogId(Long id) {
         return Optional.ofNullable(id)
                 .map(dialogRepository::getReferenceById)
                 .orElseThrow(() -> new EntityNotFoundException("Dialog with id: %d not found!".formatted(id)));
@@ -43,14 +42,14 @@ public class DialogMapperUtil {
     @Qualifier
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.CLASS)
-    public @interface UsersByDialog {
+    public @interface UsersByUserDialogs {
 
     }
 
     @Qualifier
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.CLASS)
-    public @interface  DialogByDialogId {
+    public @interface DialogByDialogId {
 
     }
 }

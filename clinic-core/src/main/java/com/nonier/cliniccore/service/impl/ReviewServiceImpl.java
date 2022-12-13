@@ -1,6 +1,7 @@
 package com.nonier.cliniccore.service.impl;
 
 import com.nonier.cliniccore.dto.ReviewDto;
+import com.nonier.cliniccore.dto.ReviewUpdateDto;
 import com.nonier.cliniccore.mapper.ReviewMapper;
 import com.nonier.cliniccore.repository.ReviewRepository;
 import com.nonier.cliniccore.service.ReviewService;
@@ -24,5 +25,18 @@ public class ReviewServiceImpl implements ReviewService {
                 .stream()
                 .map(reviewMapper::review2ReviewDto)
                 .toList();
+    }
+
+    @Override
+    public List<ReviewDto> findAllByUserId(Long userId) {
+        return reviewRepository.findAllByUser_Id(userId)
+                .stream()
+                .map(reviewMapper::review2ReviewDto)
+                .toList();
+    }
+
+    @Override
+    public ReviewDto create(ReviewUpdateDto dto) {
+        return reviewMapper.review2ReviewDto(reviewRepository.save(reviewMapper.reviewUpdateDto2Review(dto)));
     }
 }

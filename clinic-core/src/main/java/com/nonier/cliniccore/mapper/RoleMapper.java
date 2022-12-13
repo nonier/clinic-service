@@ -10,11 +10,11 @@ import org.mapstruct.MappingConstants;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface RoleMapper {
 
-    @Mapping(target = "id", source = "role.id")
-    @Mapping(target = "name", source = "role.name")
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
     RoleDto role2RoleDto(Role role);
 
-    @Mapping(target = "id", source = "userRole.role.id")
-    @Mapping(target = "name", source = "userRole.role.name")
+    @Mapping(target = "id", source = "role.id")
+    @Mapping(target = "name", source = "role.name")
     RoleDto userRole2RoleDto(UserRole userRole);
 }

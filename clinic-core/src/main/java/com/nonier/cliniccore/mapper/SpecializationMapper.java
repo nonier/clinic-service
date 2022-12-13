@@ -10,11 +10,11 @@ import org.mapstruct.MappingConstants;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface SpecializationMapper {
 
-    @Mapping(target = "id", source = "specialization.id")
-    @Mapping(target = "name", source = "specialization.name")
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
     SpecializationDto specialization2SpecializationDto(Specialization specialization);
 
-    @Mapping(target = "id", source = "doctorSpecialization.specialization.id")
-    @Mapping(target = "name", source = "doctorSpecialization.specialization.name")
+    @Mapping(target = "id", source = "specialization.id")
+    @Mapping(target = "name", source = "specialization.name")
     SpecializationDto doctorSpecialization2SpecializationDto(DoctorSpecialization doctorSpecialization);
 }

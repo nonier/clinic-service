@@ -8,20 +8,20 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {SpecializationMapper.class, UserMapper.class, DoctorMapperUtil.class})
+        uses = {SpecializationMapper.class, UserMapper.class, UserMapperUtil.class})
 public interface DoctorMapper {
 
-    @Mapping(target = "id", source = "doctor.id")
-    @Mapping(target = "ageGroup", source = "doctor.ageGroup")
-    @Mapping(target = "workExperience", source = "doctor.workExperience")
-    @Mapping(target = "rank", source = "doctor.rank")
-    @Mapping(target = "specializations", source = "doctor.doctorSpecializations")
-    @Mapping(target = "user", source = "doctor.user")
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "ageGroup", source = "ageGroup")
+    @Mapping(target = "workExperience", source = "workExperience")
+    @Mapping(target = "rank", source = "rank")
+    @Mapping(target = "specializations", source = "doctorSpecializations")
+    @Mapping(target = "user", source = "user")
     DoctorDto doctor2DoctorDto(Doctor doctor);
 
-    @Mapping(target = "ageGroup", source = "dto.ageGroup")
-    @Mapping(target = "workExperience", source = "dto.workExperience")
-    @Mapping(target = "rank", source = "dto.rank")
-    @Mapping(target = "user", source = "dto", qualifiedBy = DoctorMapperUtil.UserByDoctorUpdateDto.class)
+    @Mapping(target = "ageGroup", source = "ageGroup")
+    @Mapping(target = "workExperience", source = "workExperience")
+    @Mapping(target = "rank", source = "rank")
+    @Mapping(target = "user", source = "userId", qualifiedBy = UserMapperUtil.UserByUserId.class)
     Doctor doctorUpdateDto2Doctor(DoctorUpdateDto dto);
 }

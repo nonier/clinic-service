@@ -12,16 +12,16 @@ import org.mapstruct.MappingConstants;
 public interface UserMapper {
 
 
-    @Mapping(target = "id", source = "user.id")
-    @Mapping(target = "username", source = "user.username")
-    @Mapping(target = "name", source = "user.name")
-    @Mapping(target = "surname", source = "user.surname")
-    @Mapping(target = "roleDtos", source = "user.userRoles")
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "username", source = "username")
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "surname", source = "surname")
+    @Mapping(target = "roleDtos", source = "userRoles")
     UserDto user2UserDto(User user);
 
-    @Mapping(target = "username", source = "dto.username")
-    @Mapping(target = "name", source = "dto.name")
-    @Mapping(target = "surname", source = "dto.surname")
-    @Mapping(target = "password", source = "dto", qualifiedBy = UserMapperUtil.PasswordByUserUpdateDto.class)
+    @Mapping(target = "username", source = "username")
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "surname", source = "surname")
+    @Mapping(target = "password", source = "password", qualifiedBy = UserMapperUtil.EncodedPasswordByRawPassword.class)
     User updateUserDto2User(UserUpdateDto dto);
 }

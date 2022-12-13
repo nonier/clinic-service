@@ -11,14 +11,14 @@ import org.mapstruct.MappingConstants;
         uses = {UserMapper.class, DialogMapperUtil.class, UserMapperUtil.class})
 public interface MessageMapper {
 
-    @Mapping(target = "id", source = "message.id")
-    @Mapping(target = "text", source = "message.text")
-    @Mapping(target = "userFrom", source = "message.userFrom")
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "text", source = "text")
+    @Mapping(target = "userFrom", source = "userFrom")
     MessageDto message2MessageDto(Message message);
 
-    @Mapping(target = "id", source = "dto.id")
-    @Mapping(target = "text", source = "dto.text")
-    @Mapping(target = "userFrom", source = "dto.userFromId", qualifiedBy = UserMapperUtil.UserByUserId.class)
-    @Mapping(target = "dialog", source = "dto.dialogId", qualifiedBy = DialogMapperUtil.DialogByDialogId.class)
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "text", source = "text")
+    @Mapping(target = "userFrom", source = "userFromId", qualifiedBy = UserMapperUtil.UserByUserId.class)
+    @Mapping(target = "dialog", source = "dialogId", qualifiedBy = DialogMapperUtil.DialogByDialogId.class)
     Message messageUpdateDto2Message(MessageUpdateDto dto);
 }

@@ -29,6 +29,7 @@ public class SecurityConfig {
                                 .requestMatchers("/messages/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/dialogs/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/reviews/**").hasAnyAuthority("ADMIN", "DOCTOR")
+                                .requestMatchers("/consultations/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/actuator/**").authenticated()
                                 .requestMatchers("/login").permitAll()
                                 .anyRequest().denyAll())
@@ -38,6 +39,4 @@ public class SecurityConfig {
                 .and()
                 .build();
     }
-
-
 }

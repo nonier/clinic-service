@@ -22,9 +22,9 @@ public class UserMapperUtil {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    @PasswordByUserUpdateDto
-    public String passwordByUserUpdateDto(UserUpdateDto dto) {
-        return passwordEncoder.encode("{bcrypt}" + dto.getPassword());
+    @EncodedPasswordByRawPassword
+    public String passwordByUserUpdateDto(String rawPassword) {
+        return passwordEncoder.encode("{bcrypt}" + rawPassword);
     }
 
     @UserByUserId
@@ -37,7 +37,7 @@ public class UserMapperUtil {
     @Qualifier
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.CLASS)
-    public @interface PasswordByUserUpdateDto {
+    public @interface EncodedPasswordByRawPassword {
 
     }
 

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,7 +23,7 @@ public class DialogController {
     }
 
     @PostMapping
-    public ResponseEntity<DialogDto> create(@RequestBody DialogUpdateDto dto) {
+    public ResponseEntity<DialogDto> create(@Validated @RequestBody DialogUpdateDto dto) {
         return ResponseEntity.ok(dialogService.create(dto));
     }
 }
