@@ -5,4 +5,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = 'clinic-core'
+
+rootProject.name = 'clinic-service'
+include 'clinic-core'
+include 'clinic-admin'
