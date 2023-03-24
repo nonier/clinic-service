@@ -33,7 +33,7 @@ public class User {
     private String surname;
 
     @Column(name = "birth_date")
-    private LocalDate localDate;
+    private LocalDate birthDate;
 
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<UserRole> userRoles = new ArrayList<>();
