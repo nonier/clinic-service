@@ -1,5 +1,5 @@
 export enum AgeGroup {
-  ADULT,
-  CHILDREN,
-  ALL
+  ADULT= "Взрослые",
+  CHILDREN = "Дети",
+  ALL = "Все"
 }

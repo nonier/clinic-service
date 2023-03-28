@@ -1,4 +1,4 @@
 export enum Rank{
-  EXPERT,
-  CONSULTANT
+  EXPERT= "Эксперт",
+  CONSULTANT = "Консультант"
 }

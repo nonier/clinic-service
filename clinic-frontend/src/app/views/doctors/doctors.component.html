@@ -1,1 +1,22 @@
-<p>doctors works!</p>
+<div class="doctors">
+  <div class="doctor_info" *ngFor="let doctor of doctors">
+    <div class="doctor_avatar_block">
+      <img class="doctor_avatar" src="assets/img/doctor_blue.svg">
+      <div class="doctor_rank">
+        {{doctor.rank}}
+      </div>
+    </div>
+    <div class="doctor_name">
+      {{doctor.user.name}} {{doctor.user.surname}}
+    </div>
+    <div class="doctor_specialization">
+
+    </div>
+    <div class="doctor_experience">
+      Стаж: {{doctor.workExperience}} лет
+    </div>
+    <div class="doctor_age_group">
+      Возрастная группа: {{doctor.ageGroup}}
+    </div>
+  </div>
+</div>

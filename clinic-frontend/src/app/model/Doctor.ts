@@ -1,8 +1,9 @@
 import {AgeGroup} from "./AgeGroup";
 import {Rank} from "./Rank";
 import {User} from "./User";
+import {DoctorSpecialization} from "./DoctorSpecialization";
 
-export class Doctor{
+export class Doctor {
   id: Number;
   ageGroup: AgeGroup;
   workExperience: Number;
