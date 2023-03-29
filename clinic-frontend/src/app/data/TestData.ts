@@ -3,7 +3,6 @@ import {Doctor} from "../model/Doctor";
 import {Rank} from "../model/Rank";
 import {AgeGroup} from "../model/AgeGroup";
 import {Specialization} from "../model/Specialization";
-import {DoctorSpecialization} from "../model/DoctorSpecialization";
 
 export class TestData {
 
@@ -19,7 +18,9 @@ export class TestData {
   ]
 
   static doctors: Doctor[] = [
-    {id: 1, rank: Rank.EXPERT, user: TestData.users[0], workExperience: 23, ageGroup: AgeGroup.ALL},
-    {id: 2, rank: Rank.CONSULTANT, user: TestData.users[1], workExperience: 3, ageGroup: AgeGroup.CHILDREN}
+    {id: 1, rank: Rank.EXPERT, user: TestData.users[0], workExperience: 23, ageGroup: AgeGroup.ALL,
+      specializations: TestData.specializations},
+    {id: 2, rank: Rank.CONSULTANT, user: TestData.users[1], workExperience: 3, ageGroup: AgeGroup.CHILDREN,
+      specializations: TestData.specializations}
   ];
 }

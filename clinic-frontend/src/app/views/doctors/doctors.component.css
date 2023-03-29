@@ -9,16 +9,14 @@
 }
 .doctor_avatar_block {
   margin-right: 30px;
+  width: 100px;
+  height: 200px;
+  float: left;
 }
 .doctor_avatar {
   display: block;
   height: 100px;
   width: 100px;
-  float: left;
 }
 
-.doctor_avatar_block {
-  width: 100px;
-  height: 120px;
-  float: left;
-}
+

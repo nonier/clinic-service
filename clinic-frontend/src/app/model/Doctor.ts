@@ -1,21 +1,23 @@
 import {AgeGroup} from "./AgeGroup";
 import {Rank} from "./Rank";
 import {User} from "./User";
-import {DoctorSpecialization} from "./DoctorSpecialization";
+import {Specialization} from "./Specialization";
 
 export class Doctor {
-  id: Number;
+  id: number;
   ageGroup: AgeGroup;
-  workExperience: Number;
+  workExperience: number;
   rank: Rank;
   user: User;
+  specializations: Specialization[];
 
-
-  constructor(id: Number, ageGroup: AgeGroup, workExperience: Number, rank: Rank, user: User) {
+  constructor(id: number, ageGroup: AgeGroup, workExperience: number, rank: Rank, user: User,
+              specializations: Specialization[]) {
     this.id = id;
     this.ageGroup = ageGroup;
     this.workExperience = workExperience;
     this.rank = rank;
     this.user = user;
+    this.specializations = specializations;
   }
 }

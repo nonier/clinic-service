@@ -9,11 +9,16 @@
     <div class="doctor_name">
       {{doctor.user.name}} {{doctor.user.surname}}
     </div>
-    <div class="doctor_specialization">
-
+    <div class="doctor_specialization_block">
+        <div class="doctor_specialization" *ngFor="let spec of doctor.specializations">
+          {{spec.name}}
+        </div>
     </div>
-    <div class="doctor_experience">
-      Стаж: {{doctor.workExperience}} лет
+    <div class="doctor_experience" *ngIf="doctor.workExperience % 10 < 5">
+      Стаж: {{doctor.workExperience}} года
+    </div>
+    <div class="doctor_experience" *ngIf="doctor.workExperience % 10 >= 5">
+      Стаж: {{doctor.workExperience}} года
     </div>
     <div class="doctor_age_group">
       Возрастная группа: {{doctor.ageGroup}}
