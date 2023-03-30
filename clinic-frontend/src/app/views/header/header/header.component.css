@@ -1,15 +1,7 @@
 .header_info_block {
   height: 100px;
   padding: 20px 0 0 20px;
-  text-align: center;
   border-bottom: #42AAFF 1px groove;
-}
-
-.logo_block {
-  height: 64px;
-  width: 64px;
-  margin-right: 60px;
-  float: left;
 }
 
 .navigate_menu_block {
@@ -18,12 +10,11 @@
 
 .navigate_list {
   font-size: 20px;
-
 }
 
 li {
   display: inline;
-  margin-right: 100px;
+  margin-right: 80px;
 }
 
 
