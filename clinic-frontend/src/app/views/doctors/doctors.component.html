@@ -1,19 +1,24 @@
-<!--ПЕРЕДЕЛАТЬ НА Card bootstrap-->
 <div class="doctors">
-  <div class="doctor_info" *ngFor="let doctor of doctors">
-    <div class="doctor_avatar_block ">
+  <div class="doctor card" *ngFor="let doctor of doctors">
+    <div class="doctor_avatar_block">
       <img class="doctor_avatar" src="assets/img/doctor_blue.svg" alt="Аватар">
       <div class="doctor_rank">
         {{doctor.rank}}
       </div>
     </div>
-    <div class="doctor_name">
-      {{doctor.user.name}} {{doctor.user.surname}}
-    </div>
-    <div class="doctor_specialization_block">
-        <div class="doctor_specialization" *ngFor="let spec of doctor.specializations">
-          {{spec.name}}
-        </div>
+    <div class="doctor_description">
+      <div class="doctor_name">
+        {{doctor.user.name}} {{doctor.user.surname}}
+      </div>
+      <div class="doctor_specializations_block">
+        <!--        <div class="doctor_specialization" *ngFor="let spec of doctor.specializations">-->
+        <!--          {{spec.name}}-->
+<!--        </div>-->
+        <ul class="doctor_specializations">
+          <li class="doctor_specialization" *ngFor="let spec of doctor.specializations">
+            {{spec.name}}
+          </li>
+        </ul>
     </div>
     <div class="doctor_experience" *ngIf="doctor.workExperience % 10 < 5">
       Стаж: {{doctor.workExperience}} года
@@ -25,6 +30,7 @@
       Возрастная группа: {{doctor.ageGroup}}
     </div>
   </div>
+</div>
 </div>
 
 
