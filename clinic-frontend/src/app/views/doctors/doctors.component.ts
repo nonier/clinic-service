@@ -11,10 +11,13 @@ export class DoctorsComponent implements OnInit {
 
   doctors: Doctor[] = [];
 
-  constructor(private doctorService: DoctorService) {
+  constructor(public doctorService: DoctorService) {
   }
 
   ngOnInit() {
-    this.doctorService.doctorsSubject.subscribe(doctors => this.doctors = doctors)
+    this.doctorService.getDoctors()
+      .subscribe((doctors: Doctor[]) => {
+        this.doctors=doctors;
+      })
   }
 }

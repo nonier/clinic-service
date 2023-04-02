@@ -1,3 +1,11 @@
+.doctors_nav_menu {
+  margin-bottom: 20px;
+}
+
+.doctors_nav_menu_desc {
+  font-size: 25px;
+}
+
 .doctor {
   padding-left: 20px;
   margin-bottom: 20px;
@@ -14,6 +22,9 @@
   width: 100px;
 }
 
+.doctor_name {
+  font-size: 22px;
+}
 .doctor_specializations {
   padding: 0;
   margin: 0;

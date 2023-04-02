@@ -1,3 +1,13 @@
+<div class="doctors_nav_menu">
+  <div class="doctors_nav_menu_desc">
+    Выберите врача
+  </div>
+
+  <form class="d-flex" role="search">
+    <input class="form-control me-2" type="search" placeholder="ФИО врача" aria-label="Поиск">
+  </form>
+</div>
+
 <div class="doctors">
   <div class="doctor card" *ngFor="let doctor of doctors">
     <div class="doctor_avatar_block">
@@ -11,26 +21,23 @@
         {{doctor.user.name}} {{doctor.user.surname}}
       </div>
       <div class="doctor_specializations_block">
-        <!--        <div class="doctor_specialization" *ngFor="let spec of doctor.specializations">-->
-        <!--          {{spec.name}}-->
-<!--        </div>-->
         <ul class="doctor_specializations">
           <li class="doctor_specialization" *ngFor="let spec of doctor.specializations">
             {{spec.name}}
           </li>
         </ul>
-    </div>
-    <div class="doctor_experience" *ngIf="doctor.workExperience % 10 < 5">
-      Стаж: {{doctor.workExperience}} года
-    </div>
-    <div class="doctor_experience" *ngIf="doctor.workExperience % 10 >= 5">
-      Стаж: {{doctor.workExperience}} года
-    </div>
-    <div class="doctor_age_group">
-      Возрастная группа: {{doctor.ageGroup}}
+      </div>
+      <div class="doctor_experience" *ngIf="doctor.workExperience % 10 < 5">
+        Стаж: {{doctor.workExperience}} года
+      </div>
+      <div class="doctor_experience" *ngIf="doctor.workExperience % 10 >= 5">
+        Стаж: {{doctor.workExperience}} года
+      </div>
+      <div class="doctor_age_group">
+        Возрастная группа: {{doctor.ageGroup}}
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 

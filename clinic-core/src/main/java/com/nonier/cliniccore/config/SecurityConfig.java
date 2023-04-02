@@ -7,6 +7,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 
 @Configuration
@@ -20,12 +25,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf()
+        return http
+                .cors()
+                .and()
+                .csrf()
                 .disable()
-                .authorizeHttpRequests( req ->
-                        req.requestMatchers("/users/**").hasAuthority("ADMIN")
+                .authorizeHttpRequests(req ->
+                        req.requestMatchers("/doctors/**").permitAll()
+                                .requestMatchers("/users/**").hasAuthority("ADMIN")
                                 .requestMatchers("/role/**").hasAuthority("ADMIN")
-                                .requestMatchers("/doctors/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/messages/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/dialogs/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/reviews/**").hasAnyAuthority("ADMIN", "DOCTOR")
@@ -38,5 +46,15 @@ public class SecurityConfig {
                 .httpBasic()
                 .and()
                 .build();
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }
