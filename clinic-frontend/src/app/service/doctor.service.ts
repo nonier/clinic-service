@@ -6,7 +6,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class DoctorService{
+export class DoctorService {
 
   doctorsSubject =
     new Subject<Doctor[]>();
@@ -15,13 +15,20 @@ export class DoctorService{
   }
 
   getDoctors() {
-    return this.http.get<Doctor[]>("http://localhost:8080/doctors");
+    this.http.get<Doctor[]>("http://localhost:8080/doctors")
+      .subscribe((doctors: Doctor[]) => {
+          this.doctorsSubject.next(doctors);
+        }
+      )
   }
 
   getDoctorsWithFilters(name: string, specializationIds: number[]) {
     let params = new HttpParams()
       .set('name', name)
       .set('specializationIds', specializationIds.join(','));
-    return this.http.get<Doctor[]>("http://localhost:8080/doctors/filter", {params})
+    this.http.get<Doctor[]>("http://localhost:8080/doctors/filter", {params})
+      .subscribe((doctors: Doctor[]) => {
+        this.doctorsSubject.next(doctors);
+      })
   }
 }

@@ -7,13 +7,15 @@ import {HeaderComponent} from './views/header/header/header.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {NgxBootstrapMultiselectModule} from "ngx-bootstrap-multiselect";
+import {SearchComponent} from "./views/search/search.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DoctorsComponent,
-    HeaderComponent
-  ],
+    declarations: [
+        AppComponent,
+        DoctorsComponent,
+        HeaderComponent,
+        SearchComponent
+    ],
   imports: [
     BrowserModule,
     HttpClientModule,

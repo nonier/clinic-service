@@ -1,17 +1,3 @@
-<div class="doctors_nav_menu">
-  <div class="doctors_nav_menu_desc">
-    Выберите врача
-  </div>
-
-  <div class="input-group">
-    <input #doctor_search_name type="text" class="form-control" placeholder="ФИО врача"
-           (keyup)="findByFilter(doctor_search_name.value)">
-    <ngx-bootstrap-multiselect [options]="specializationOptions" [(ngModel)]="specializationIdsFilter"
-                               [texts] = "specializationsTexts"
-                               (ngModelChange)="onChangeSpecializations()"></ngx-bootstrap-multiselect>
-  </div>
-</div>
-
 <div class="doctors">
   <div class="doctor card" *ngFor="let doctor of doctors">
     <div class="doctor_avatar_block">
@@ -31,11 +17,11 @@
           </li>
         </ul>
       </div>
-      <div class="doctor_experience" *ngIf="doctor.workExperience % 10 < 5">
+      <div class="doctor_experience" *ngIf="doctor.workExperience % 10 < 5 && doctor.workExperience % 10 > 0">
         Стаж: {{doctor.workExperience}} года
       </div>
-      <div class="doctor_experience" *ngIf="doctor.workExperience % 10 >= 5">
-        Стаж: {{doctor.workExperience}} года
+      <div class="doctor_experience" *ngIf="doctor.workExperience % 10 >= 5 || doctor.workExperience % 10 == 0">
+        Стаж: {{doctor.workExperience}} лет
       </div>
       <div class="doctor_age_group">
         Возрастная группа: {{doctor.ageGroup}}
