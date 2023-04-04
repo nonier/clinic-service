@@ -18,9 +18,10 @@ export class DoctorService{
     return this.http.get<Doctor[]>("http://localhost:8080/doctors");
   }
 
-  getDoctorsWithFilters(name: string) {
+  getDoctorsWithFilters(name: string, specializationIds: number[]) {
     let params = new HttpParams()
-      .set('name', name);
+      .set('name', name)
+      .set('specializationIds', specializationIds.join(','));
     return this.http.get<Doctor[]>("http://localhost:8080/doctors/filter", {params})
   }
 }

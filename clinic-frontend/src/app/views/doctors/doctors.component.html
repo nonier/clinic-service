@@ -3,10 +3,13 @@
     Выберите врача
   </div>
 
-  <form class="d-flex" role="search">
-    <input #doctor_search_name class="form-control me-2" type="text" placeholder="ФИО врача"
-    (keyup)="findByFilter(doctor_search_name.value)">
-  </form>
+  <div class="input-group">
+    <input #doctor_search_name type="text" class="form-control" placeholder="ФИО врача"
+           (keyup)="findByFilter(doctor_search_name.value)">
+    <ngx-bootstrap-multiselect [options]="specializationOptions" [(ngModel)]="specializationIdsFilter"
+                               [texts] = "specializationsTexts"
+                               (ngModelChange)="onChangeSpecializations()"></ngx-bootstrap-multiselect>
+  </div>
 </div>
 
 <div class="doctors">

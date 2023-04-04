@@ -18,5 +18,5 @@ public interface DoctorService {
 
     void delete(Long id);
 
-    List<DoctorDto> findAllByFilter(Optional<String> name);
+    List<DoctorDto> findAllByFilter(Optional<String> name, List<Long> specializationIds);
 }

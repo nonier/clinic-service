@@ -80,8 +80,8 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<DoctorDto> findAllByFilter(Optional<String> name) {
-        DoctorSpecification doctorSpecification = new DoctorSpecification(name);
+    public List<DoctorDto> findAllByFilter(Optional<String> name, List<Long> specializationIds) {
+        DoctorSpecification doctorSpecification = new DoctorSpecification(name, specializationIds);
         return doctorRepository.findAll(doctorSpecification)
                 .stream()
                 .map(doctorMapper::doctor2DoctorDto)

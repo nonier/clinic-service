@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests(req ->
                         req.requestMatchers("/doctors/**").permitAll()
+                                .requestMatchers("/specializations/**").permitAll()
                                 .requestMatchers("/users/**").hasAuthority("ADMIN")
                                 .requestMatchers("/role/**").hasAuthority("ADMIN")
                                 .requestMatchers("/messages/**").hasAnyAuthority("ADMIN", "DOCTOR")

@@ -25,9 +25,10 @@ public class DoctorController {
 
     @GetMapping("/filter")
     public ResponseEntity<List<DoctorDto>> findAllByFilter(
-            @RequestParam(required = false) Optional<String> name
+            @RequestParam(required = false) Optional<String> name,
+            @RequestParam List<Long> specializationIds
     ) {
-        return ResponseEntity.ok(doctorService.findAllByFilter(name));
+        return ResponseEntity.ok(doctorService.findAllByFilter(name, specializationIds));
     }
 
     @GetMapping("/{id}")
