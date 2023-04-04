@@ -4,6 +4,7 @@ import com.nonier.cliniccore.dto.DoctorDto;
 import com.nonier.cliniccore.dto.DoctorUpdateDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DoctorService {
 
@@ -16,4 +17,6 @@ public interface DoctorService {
     DoctorDto update(Long id, DoctorUpdateDto dto);
 
     void delete(Long id);
+
+    List<DoctorDto> findAllByFilter(Optional<String> name);
 }

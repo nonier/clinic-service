@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { DoctorsComponent } from './views/doctors/doctors.component';
 import { HeaderComponent } from './views/header/header/header.component';
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -12,10 +13,11 @@ import {HttpClientModule} from "@angular/common/http";
     DoctorsComponent,
     HeaderComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

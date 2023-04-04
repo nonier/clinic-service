@@ -18,6 +18,7 @@ public interface ConsultationMapper {
     ConsultationDto consultation2ConsultationDto(Consultation consultation);
 
     @Mapping(target = "date", source = "date")
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "doctor", source = "doctorId", qualifiedBy = DoctorMapperUtil.DoctorByDoctorId.class)
     @Mapping(target = "client", source = "clientId", qualifiedBy = UserMapperUtil.UserByUserId.class)
     Consultation consultationUpdateDto2Consultation(ConsultationUpdateDto dto);

@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/doctors")
@@ -20,6 +21,13 @@ public class DoctorController {
     @GetMapping
     public ResponseEntity<List<DoctorDto>> findAll(){
         return ResponseEntity.ok(doctorService.findAll());
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<DoctorDto>> findAllByFilter(
+            @RequestParam(required = false) Optional<String> name
+    ) {
+        return ResponseEntity.ok(doctorService.findAllByFilter(name));
     }
 
     @GetMapping("/{id}")

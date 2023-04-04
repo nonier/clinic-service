@@ -9,11 +9,13 @@ import com.nonier.cliniccore.repository.DoctorRepository;
 import com.nonier.cliniccore.repository.DoctorSpecializationRepository;
 import com.nonier.cliniccore.repository.SpecializationRepository;
 import com.nonier.cliniccore.service.DoctorService;
+import com.nonier.cliniccore.specification.DoctorSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -75,5 +77,14 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public void delete(Long id) {
         doctorRepository.deleteById(id);
+    }
+
+    @Override
+    public List<DoctorDto> findAllByFilter(Optional<String> name) {
+        DoctorSpecification doctorSpecification = new DoctorSpecification(name);
+        return doctorRepository.findAll(doctorSpecification)
+                .stream()
+                .map(doctorMapper::doctor2DoctorDto)
+                .toList();
     }
 }

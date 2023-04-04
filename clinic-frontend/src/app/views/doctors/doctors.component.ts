@@ -10,12 +10,20 @@ import {Doctor} from "../../model/Doctor";
 export class DoctorsComponent implements OnInit {
 
   doctors: Doctor[] = [];
+  name: string="";
 
   constructor(public doctorService: DoctorService) {
   }
 
   ngOnInit() {
     this.doctorService.getDoctors()
+      .subscribe((doctors: Doctor[]) => {
+        this.doctors=doctors;
+      })
+  }
+
+  findByFilter(name: string) {
+    this.doctorService.getDoctorsWithFilters(name)
       .subscribe((doctors: Doctor[]) => {
         this.doctors=doctors;
       })
