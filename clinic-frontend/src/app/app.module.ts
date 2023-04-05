@@ -3,20 +3,22 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {DoctorsComponent} from './views/doctors/doctors.component';
-import {HeaderComponent} from './views/header/header/header.component';
+import {NavComponent} from './views/header/nav/nav.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {NgxBootstrapMultiselectModule} from "ngx-bootstrap-multiselect";
 import {SearchComponent} from "./views/search/search.component";
 import { FreeConsultationPipe } from './pipe/free-consultation.pipe';
+import { LoginComponent } from './views/login/login.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         DoctorsComponent,
-        HeaderComponent,
+        NavComponent,
         SearchComponent,
-        FreeConsultationPipe
+        FreeConsultationPipe,
+        LoginComponent
     ],
   imports: [
     BrowserModule,
