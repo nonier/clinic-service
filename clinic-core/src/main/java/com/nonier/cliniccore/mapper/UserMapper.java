@@ -19,6 +19,12 @@ public interface UserMapper {
     @Mapping(target = "roleDtos", source = "userRoles")
     UserDto user2UserDto(User user);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "birthDate", ignore = true)
+    @Mapping(target = "userRoles", ignore = true)
+    @Mapping(target = "doctor", ignore = true)
+    @Mapping(target = "userDialogs", ignore = true)
+    @Mapping(target = "reviews", ignore = true)
     @Mapping(target = "username", source = "username")
     @Mapping(target = "name", source = "name")
     @Mapping(target = "surname", source = "surname")

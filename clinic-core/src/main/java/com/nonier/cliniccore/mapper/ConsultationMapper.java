@@ -13,12 +13,11 @@ public interface ConsultationMapper {
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "date", source = "date")
-    @Mapping(target = "doctor", source = "doctor")
     @Mapping(target = "client", source = "client")
     ConsultationDto consultation2ConsultationDto(Consultation consultation);
 
-    @Mapping(target = "date", source = "date")
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "date", source = "date")
     @Mapping(target = "doctor", source = "doctorId", qualifiedBy = DoctorMapperUtil.DoctorByDoctorId.class)
     @Mapping(target = "client", source = "clientId", qualifiedBy = UserMapperUtil.UserByUserId.class)
     Consultation consultationUpdateDto2Consultation(ConsultationUpdateDto dto);

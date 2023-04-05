@@ -17,6 +17,7 @@ public interface ReviewMapper {
     @Mapping(target = "user", source = "user")
     ReviewDto review2ReviewDto(Review review);
 
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "rate", source = "rate")
     @Mapping(target = "comment", source = "comment")
     @Mapping(target = "user", source = "userId", qualifiedBy = UserMapperUtil.UserByUserId.class)

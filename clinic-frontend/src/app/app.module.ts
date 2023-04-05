@@ -8,13 +8,15 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {NgxBootstrapMultiselectModule} from "ngx-bootstrap-multiselect";
 import {SearchComponent} from "./views/search/search.component";
+import { FreeConsultationPipe } from './pipe/free-consultation.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         DoctorsComponent,
         HeaderComponent,
-        SearchComponent
+        SearchComponent,
+        FreeConsultationPipe
     ],
   imports: [
     BrowserModule,

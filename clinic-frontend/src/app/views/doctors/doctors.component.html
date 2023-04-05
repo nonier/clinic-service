@@ -27,6 +27,22 @@
         Возрастная группа: {{doctor.ageGroup}}
       </div>
     </div>
+    <div class="doctor_busy" *ngIf="doctor.consultations === null ||
+                                    (doctor.consultations | freeConsultation).length === 0">
+      У доктора нет свободных консультаций
+    </div>
+    <div class="doctor_schedule" *ngIf="doctor.consultations != null && (doctor.consultations | freeConsultation).length > 0">
+      <div>
+        Расписание
+      </div>
+      <div class="nav">
+        <li class="nav-item" *ngFor="let consultation of doctor.consultations | freeConsultation">
+          <button type="button" class="btn btn-primary consultation_date">
+            {{consultation.date | date:'medium'}}
+          </button>
+        </li>
+      </div>
+    </div>
   </div>
 </div>
 

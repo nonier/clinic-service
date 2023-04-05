@@ -15,4 +15,5 @@ public class DoctorDto {
     private Rank rank;
     private List<SpecializationDto> specializations;
     private UserDto user;
+    private List<ConsultationDto> consultations;
 }

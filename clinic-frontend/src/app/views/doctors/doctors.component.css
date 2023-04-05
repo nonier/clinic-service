@@ -5,6 +5,11 @@
   flex-flow: row wrap;
   font-size: 18px;
 }
+
+.doctor_description {
+  margin-right: 60px;
+}
+
 .doctor_avatar_block {
   margin-right: 20px;
 }
@@ -34,4 +39,7 @@
   content: "";
 }
 
+.consultation_date {
+  margin-right: 10px;
+}
 

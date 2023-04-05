@@ -33,12 +33,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req ->
                         req.requestMatchers("/doctors/**").permitAll()
                                 .requestMatchers("/specializations/**").permitAll()
+                                .requestMatchers("/consultations/**").permitAll()
                                 .requestMatchers("/users/**").hasAuthority("ADMIN")
                                 .requestMatchers("/role/**").hasAuthority("ADMIN")
                                 .requestMatchers("/messages/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/dialogs/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/reviews/**").hasAnyAuthority("ADMIN", "DOCTOR")
-                                .requestMatchers("/consultations/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/actuator/**").authenticated()
                                 .requestMatchers("/login").permitAll()
                                 .anyRequest().denyAll())
