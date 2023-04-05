@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Doctor} from "../model/Doctor";
 import {Subject} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
+import {Doctor} from "../../model/Doctor";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DoctorService {
+export class DoctorService{
 
   doctorsSubject =
     new Subject<Doctor[]>();

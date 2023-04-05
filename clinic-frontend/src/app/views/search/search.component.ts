@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {IMultiSelectOption, IMultiSelectTexts} from "ngx-bootstrap-multiselect";
-import {DoctorsComponent} from "../doctors/doctors.component";
-import {SpecializationService} from "../../service/specialization.service";
+import {SpecializationService} from "../../service/specialization/specialization.service";
 import {Specialization} from "../../model/Specialization";
-import {Doctor} from "../../model/Doctor";
-import {DoctorService} from "../../service/doctor.service";
+import {DoctorService} from "../../service/doctor/doctor.service";
 
 @Component({
   selector: 'app-search',
@@ -25,7 +23,7 @@ export class SearchComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.specializationService.getSpecializations()
+    this.specializationService.specializationSubject
       .subscribe((specializations: Specialization[]) => {
         this.specializationOptions = specializations;
       })

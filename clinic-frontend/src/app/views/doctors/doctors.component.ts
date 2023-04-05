@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {DoctorService} from "../../service/doctor.service";
 import {Doctor} from "../../model/Doctor";
+import {DoctorService} from "../../service/doctor/doctor.service";
 
 @Component({
   selector: 'app-doctors',
@@ -19,5 +19,6 @@ export class DoctorsComponent implements OnInit {
       .subscribe((doctors: Doctor[]) => {
         this.doctors = doctors;
       })
+    this.doctorService.getDoctors();
   }
 }
