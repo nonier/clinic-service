@@ -15,7 +15,7 @@ export class DoctorService{
   }
 
   getDoctors() {
-    this.http.get<Doctor[]>("http://localhost:8080/doctors")
+    this.http.get<Doctor[]>("/api/doctors")
       .subscribe((doctors: Doctor[]) => {
           this.doctorsSubject.next(doctors);
         }
@@ -26,7 +26,7 @@ export class DoctorService{
     let params = new HttpParams()
       .set('name', name)
       .set('specializationIds', specializationIds.join(','));
-    this.http.get<Doctor[]>("http://localhost:8080/doctors/filter", {params})
+    this.http.get<Doctor[]>("clinic.com/api/doctors/filter", {params})
       .subscribe((doctors: Doctor[]) => {
         this.doctorsSubject.next(doctors);
       })

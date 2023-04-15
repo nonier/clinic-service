@@ -43,8 +43,10 @@ public class SecurityConfig {
                                 .requestMatchers("/login").permitAll()
                                 .anyRequest().denyAll())
                 .formLogin()
-                .and()
-                .httpBasic()
+                .loginPage("http://frontend:8080/auth/login")
+                .loginProcessingUrl("/login")
+                .successForwardUrl("http://frontend:8080/doctors")
+                .failureForwardUrl("http://frontend:8080/auth/login")
                 .and()
                 .build();
     }
@@ -52,7 +54,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedOrigins(Arrays.asList("http://frontend:8080"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

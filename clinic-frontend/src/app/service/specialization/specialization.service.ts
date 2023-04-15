@@ -15,7 +15,7 @@ export class SpecializationService {
   }
 
   getSpecializations() {
-    this.http.get<Specialization[]>("http://localhost:8080/specializations")
+    this.http.get<Specialization[]>("/api/specializations")
       .subscribe((spec) => {
         this.specializationSubject.next(spec);
       })
