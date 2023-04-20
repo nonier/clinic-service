@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../service/auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -11,7 +12,7 @@ export class LoginPageComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -27,8 +28,16 @@ export class LoginPageComponent implements OnInit {
       password: this.form.value.password
     };
     this.auth.login(user).subscribe(
+      result => {
+            console.log(this.form.get('username') + ':' + this.form.get('password'));
+            sessionStorage.setItem(
+              'token',
+              btoa(this.form.get('username') + ':' + this.form.get('password'))
+            );
+            this.router.navigate(['']);
+        },
       () => {
-        console.log("login success")
+        console.log('unauthorized');
       }
     )
   }

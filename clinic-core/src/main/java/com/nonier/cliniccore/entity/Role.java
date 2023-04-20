@@ -1,5 +1,6 @@
 package com.nonier.cliniccore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,6 +25,7 @@ public class Role implements GrantedAuthority {
     private String name;
 
     @OneToMany(mappedBy = "role")
+    @JsonIgnore
     private List<UserRole> userRoles = new ArrayList<>();
 
     @Override

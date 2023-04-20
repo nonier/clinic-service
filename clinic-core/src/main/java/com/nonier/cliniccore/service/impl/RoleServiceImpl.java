@@ -41,4 +41,12 @@ public class RoleServiceImpl implements RoleService {
                 .map(roleMapper::role2RoleDto)
                 .orElseThrow(() -> new EntityNotFoundException("Role with id: %d not found!".formatted(id)));
     }
+
+    @Override
+    public List<RoleDto> findRolesByUser(Long userId) {
+        return roleRepository.getRolesByUser(userId)
+                .stream()
+                .map(roleMapper::role2RoleDto)
+                .toList();
+    }
 }

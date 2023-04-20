@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from "../../model/User";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,18 @@ export class AuthService {
 
   }
 
-  login(user: User): Observable<any> {
-    return this.http.post("/api/login", user);
+  login(user: User) {
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(user.username + ':' + user.password) });
+    return this.http.get<User>('/doctors',{headers}).pipe(
+      map(
+        userData => {
+          sessionStorage.setItem('username',user.username);
+          return userData;
+        }
+      ));
+  }
+
+  createBasicAuthToken(username: String, password: String) {
+    return 'Basic ' + window.btoa(username + ":" + password)
   }
 }
