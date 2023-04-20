@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../service/auth/auth.service";
 import {Router} from "@angular/router";
+import {TokenService} from "../service/storage/storage.servise";
 
 @Component({
   selector: 'app-login-page',
@@ -11,8 +12,10 @@ import {Router} from "@angular/router";
 export class LoginPageComponent implements OnInit {
 
   form: FormGroup;
+  isLoggedIn = false;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private auth: AuthService, private tokenService: TokenService, private router: Router) {
+    this.isLoggedIn = tokenService.isLoggedIn();
   }
 
   ngOnInit(): void {
@@ -28,16 +31,10 @@ export class LoginPageComponent implements OnInit {
       password: this.form.value.password
     };
     this.auth.login(user).subscribe(
-      result => {
-            console.log(this.form.get('username') + ':' + this.form.get('password'));
-            sessionStorage.setItem(
-              'token',
-              btoa(this.form.get('username') + ':' + this.form.get('password'))
-            );
-            this.router.navigate(['']);
-        },
-      () => {
-        console.log('unauthorized');
+      token => {
+        this.isLoggedIn = true;
+        this.tokenService.saveTokens(token);
+        this.router.navigateByUrl("/");
       }
     )
   }

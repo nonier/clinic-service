@@ -1,1 +1,40 @@
-<p>registration-page works!</p>
+<form class="card"
+      *ngIf="!isLoggedIn"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()">
+  <div class="card-content">
+    <span class="card-title">
+      Register in the system
+    </span>
+    <div class="input-field">
+      <input id="username"
+             type="email"
+             formControlName="username"
+             placeholder="username"
+             [ngClass]="{'invalid':form.get('username').invalid && form.get('username').touched}"/>
+      <span class="helper-text red-text" *ngIf="form.get('username').invalid && form.get('username').touched">
+          <span *ngIf="form.get('username').errors['required']">Username is empty</span>
+        <span *ngIf="form.get('username').errors['minlength'] && form.get('username').errors['minlength']['requiredLength']">
+            Username length should be more then {{form.get('username').errors['minlength']['requiredLength']}} symbols
+          </span>
+      </span>
+    </div>
+    <div class="input-field">
+      <input id="password"
+             type="password"
+             formControlName="password"
+             placeholder="password"
+             [ngClass]="{'invalid':form.get('password').invalid && form.get('password').touched}"/>
+      <span class="helper-text red-text" *ngIf="form.get('password').invalid && form.get('password').touched">
+          <span *ngIf="form.get('password').errors['required']">Password is empty</span>
+          <span *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">
+            Password length should be more then {{form.get('password').errors['minlength']['requiredLength']}} symbols
+          </span>
+      </span>
+    </div>
+    <button type="submit"
+            [disabled]="form.invalid">
+      Register
+    </button>
+  </div>
+</form>

@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -46,7 +45,9 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers(HttpMethod.GET, "/doctors/**").permitAll()
+                        req.requestMatchers("/login").permitAll()
+                                .requestMatchers("/register").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/doctors/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/specializations/**").permitAll()
                                 .requestMatchers("/consultations/**").authenticated()
                                 .requestMatchers("/users/**").hasAuthority("ADMIN")
@@ -55,7 +56,6 @@ public class SecurityConfig {
                                 .requestMatchers("/dialogs/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/reviews/**").hasAnyAuthority("ADMIN", "DOCTOR")
                                 .requestMatchers("/actuator/**").authenticated()
-                                .requestMatchers("/login").permitAll()
                                 .anyRequest().denyAll())
                 .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

@@ -25,8 +25,6 @@ export class DoctorsPageComponent {
   ngOnInit() {
     this.doctorService.getDoctors()
       .subscribe(doctors => this.doctors= doctors);
-
-    console.log(this.doctors);
     this.specializationService.getSpecializations()
       .subscribe(specializations => {
         this.specializationOptions = specializations;

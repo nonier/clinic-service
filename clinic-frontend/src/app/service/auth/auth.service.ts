@@ -1,32 +1,33 @@
 import {Injectable} from '@angular/core';
 import {User} from "../../model/User";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {map} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {TokenService} from "../storage/storage.servise";
+import {Observable} from "rxjs";
+import {TokenResponse} from "../../model/TokenResponse";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private storageService: TokenService) {
   }
 
-  register() {
-
+  login(user: User): Observable<TokenResponse> {
+    return this.http.post<TokenResponse>('http://localhost:8080/api/login', {
+      username: user.username,
+      password: user.password
+    });
   }
 
-  login(user: User) {
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(user.username + ':' + user.password) });
-    return this.http.get<User>('/doctors',{headers}).pipe(
-      map(
-        userData => {
-          sessionStorage.setItem('username',user.username);
-          return userData;
-        }
-      ));
+  register(user: User): Observable<any> {
+    return this.http.post<string>('http://localhost:8080/api/register', {
+      username: user.username,
+      password: user.password
+    });
   }
 
-  createBasicAuthToken(username: String, password: String) {
-    return 'Basic ' + window.btoa(username + ":" + password)
+  logout() {
+    this.storageService.clean();
   }
 }

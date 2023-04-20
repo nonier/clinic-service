@@ -1,5 +1,6 @@
 package com.nonier.cliniccore.controller;
 
+import com.nonier.cliniccore.dto.RegistrationDto;
 import com.nonier.cliniccore.jwt.JwtRequest;
 import com.nonier.cliniccore.jwt.JwtResponse;
 import com.nonier.cliniccore.jwt.RefreshJwtRequest;
@@ -20,6 +21,12 @@ public class AuthController {
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest authRequest) {
         final JwtResponse token = authService.login(authRequest);
         return ResponseEntity.ok(token);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<Void> register(@RequestBody RegistrationDto registrationDto) {
+        authService.register(registrationDto);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/token")

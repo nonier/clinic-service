@@ -4,20 +4,25 @@
     <ul class="right hide-on-med-and-down">
       <li>
         <a routerLink="/doctors">
-          Врачи
+          Doctors
         </a>
       </li>
       <li>
-        <a href="#">О нас</a>
+        <a (click)="check()">About us</a>
       </li>
-      <li>
+      <li *ngIf="!isLoggedIn">
         <a routerLink="/auth/login">
-          Вход
+          Sign in
         </a>
       </li>
-      <li>
+      <li *ngIf="!isLoggedIn">
         <a routerLink="/auth/registration">
-          Регистрация
+          Sign up
+        </a>
+      </li>
+      <li *ngIf="isLoggedIn">
+        <a (click)="logout()">
+          Logout
         </a>
       </li>
     </ul>

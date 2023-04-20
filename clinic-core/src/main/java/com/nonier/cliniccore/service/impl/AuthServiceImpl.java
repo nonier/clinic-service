@@ -1,5 +1,6 @@
 package com.nonier.cliniccore.service.impl;
 
+import com.nonier.cliniccore.dto.RegistrationDto;
 import com.nonier.cliniccore.entity.User;
 import com.nonier.cliniccore.jwt.JwtProvider;
 import com.nonier.cliniccore.jwt.JwtRequest;
@@ -7,9 +8,9 @@ import com.nonier.cliniccore.jwt.JwtResponse;
 import com.nonier.cliniccore.repository.UserRepository;
 import com.nonier.cliniccore.service.AuthService;
 import io.jsonwebtoken.Claims;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public JwtResponse login(JwtRequest request) {
         final User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("User with username: %s not found!".formatted(request.getUsername())));
+                .orElseThrow(() -> new EntityNotFoundException("User with username: %s not found!".formatted(request.getUsername())));
         if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             final String accessToken = jwtProvider.generateAccessToken(user);
             final String refreshToken = jwtProvider.generateRefreshToken(user);
@@ -50,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
             final String saveRefreshToken = refreshStorage.get(username);
             if (saveRefreshToken != null && saveRefreshToken.equals(refreshToken)) {
                 final User user = userRepository.findByUsername(username)
-                        .orElseThrow(() -> new UsernameNotFoundException("User with username: %s not found!".formatted(username)));
+                        .orElseThrow(() -> new EntityNotFoundException("User with username: %s not found!".formatted(username)));
                 final String accessToken = jwtProvider.generateAccessToken(user);
                 return new JwtResponse(accessToken, null);
             }
@@ -66,7 +67,7 @@ public class AuthServiceImpl implements AuthService {
             final String saveRefreshToken = refreshStorage.get(username);
             if (saveRefreshToken != null && saveRefreshToken.equals(refreshToken)) {
                 final User user = userRepository.findByUsername(username)
-                        .orElseThrow(() -> new UsernameNotFoundException("User with username: %s not found!".formatted(username)));
+                        .orElseThrow(() -> new EntityNotFoundException("User with username: %s not found!".formatted(username)));
                 final String accessToken = jwtProvider.generateAccessToken(user);
                 final String newRefreshToken = jwtProvider.generateRefreshToken(user);
                 refreshStorage.put(user.getUsername(), newRefreshToken);
@@ -74,5 +75,19 @@ public class AuthServiceImpl implements AuthService {
             }
         }
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "incorrect password");
+    }
+
+    @Override
+    public void register(RegistrationDto registrationDto) {
+        userRepository.findByUsername(registrationDto.getUsername())
+                .ifPresent(
+                        (user) -> {
+                            throw new ResponseStatusException(HttpStatus.CONFLICT, "username is already exists");
+                        }
+                );
+        User user = new User();
+        user.setUsername(registrationDto.getUsername());
+        user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
+        userRepository.save(user);
     }
 }
