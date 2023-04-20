@@ -3,7 +3,6 @@ import {Doctor} from "../model/Doctor";
 import {DoctorService} from "../service/doctor/doctor.service";
 import {IMultiSelectOption, IMultiSelectTexts} from "ngx-bootstrap-multiselect";
 import {SpecializationService} from "../service/specialization/specialization.service";
-import {Specialization} from "../model/Specialization";
 
 @Component({
   selector: 'app-doctors-page',
@@ -24,24 +23,24 @@ export class DoctorsPageComponent {
   }
 
   ngOnInit() {
-    this.doctorService.doctorsSubject
-      .subscribe((doctors: Doctor[]) => {
-        this.doctors = doctors;
-      })
-    this.doctorService.getDoctors();
+    this.doctorService.getDoctors()
+      .subscribe(doctors => this.doctors= doctors);
 
-    this.specializationService.specializationSubject
-      .subscribe((specializations: Specialization[]) => {
+    console.log(this.doctors);
+    this.specializationService.getSpecializations()
+      .subscribe(specializations => {
         this.specializationOptions = specializations;
       })
   }
 
   findByFilter(name: string) {
     this.nameFilter = name;
-    this.doctorService.getDoctorsWithFilters(this.nameFilter, this.specializationIdsFilter);
+    this.doctorService.getDoctorsWithFilters(this.nameFilter, this.specializationIdsFilter)
+      .subscribe(doctors => this.doctors = doctors);
   }
 
   onChangeSpecializations() {
-    this.doctorService.getDoctorsWithFilters(this.nameFilter, this.specializationIdsFilter);
+    this.doctorService.getDoctorsWithFilters(this.nameFilter, this.specializationIdsFilter)
+      .subscribe(doctors => this.doctors = doctors);
   }
 }

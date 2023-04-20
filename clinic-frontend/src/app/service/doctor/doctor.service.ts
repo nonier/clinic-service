@@ -1,34 +1,24 @@
 import {Injectable} from '@angular/core';
-import {Subject} from "rxjs";
+import {Observable} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Doctor} from "../../model/Doctor";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DoctorService{
-
-  doctorsSubject =
-    new Subject<Doctor[]>();
+export class DoctorService {
 
   constructor(private http: HttpClient) {
   }
 
-  getDoctors() {
-    this.http.get<Doctor[]>("/api/doctors")
-      .subscribe((doctors: Doctor[]) => {
-          this.doctorsSubject.next(doctors);
-        }
-      )
+  getDoctors(): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>("http://localhost:8080/api/doctors");
   }
 
-  getDoctorsWithFilters(name: string, specializationIds: number[]) {
+  getDoctorsWithFilters(name: string, specializationIds: number[]): Observable<Doctor[]> {
     let params = new HttpParams()
       .set('name', name)
       .set('specializationIds', specializationIds.join(','));
-    this.http.get<Doctor[]>("clinic.com/api/doctors/filter", {params})
-      .subscribe((doctors: Doctor[]) => {
-        this.doctorsSubject.next(doctors);
-      })
+    return this.http.get<Doctor[]>("http://localhost:8080/api/doctors/filter", {params});
   }
 }

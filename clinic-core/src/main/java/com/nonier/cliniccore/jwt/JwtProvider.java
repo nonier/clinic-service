@@ -55,6 +55,7 @@ public class JwtProvider {
         return jwtAuthentication;
     }
 
+    // TODO: 20.04.2023 need refactoring
     private List<Role> getRoles(Claims claims) {
         List<Long> rolesIds = (claims.get("roles", List.class))
                 .stream()

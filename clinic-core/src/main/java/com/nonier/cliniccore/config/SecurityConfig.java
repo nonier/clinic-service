@@ -3,8 +3,11 @@ package com.nonier.cliniccore.config;
 import com.nonier.cliniccore.jwt.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -13,6 +16,11 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 
 @Configuration
@@ -31,16 +39,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .cors()
-                .disable()
+                .and()
                 .csrf()
                 .disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/doctors/**").authenticated()
-                                .requestMatchers("/specializations/**").permitAll()
-                                .requestMatchers("/consultations/**").permitAll()
+                        req.requestMatchers(HttpMethod.GET, "/doctors/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/specializations/**").permitAll()
+                                .requestMatchers("/consultations/**").authenticated()
                                 .requestMatchers("/users/**").hasAuthority("ADMIN")
                                 .requestMatchers("/role/**").hasAuthority("ADMIN")
                                 .requestMatchers("/messages/**").hasAnyAuthority("ADMIN", "DOCTOR")
@@ -51,5 +59,17 @@ public class SecurityConfig {
                                 .anyRequest().denyAll())
                 .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource()
+    {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept","Authorization"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }
