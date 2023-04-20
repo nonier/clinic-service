@@ -11,6 +11,7 @@ import {SiteLayoutComponent} from './shared/layouts/site-layout/site-layout.comp
 import {RegistrationPageComponent} from './registration-page/registration-page.component';
 import {DoctorsPageComponent} from './doctors-page/doctors-page.component';
 import {AuthInterceptor} from "./interseptor/AuthInterseptor";
+import {ProfilePageComponent} from "./profile-page/profile-page.component";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {AuthInterceptor} from "./interseptor/AuthInterseptor";
     LoginPageComponent,
     SiteLayoutComponent,
     RegistrationPageComponent,
-    DoctorsPageComponent
+    DoctorsPageComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,

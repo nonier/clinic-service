@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Doctor} from "../model/Doctor";
 import {DoctorService} from "../service/doctor/doctor.service";
 import {IMultiSelectOption, IMultiSelectTexts} from "ngx-bootstrap-multiselect";
 import {SpecializationService} from "../service/specialization/specialization.service";
+import {ConsultationService} from "../service/consultation/consultation.service";
 
 @Component({
   selector: 'app-doctors-page',
   templateUrl: './doctors-page.component.html',
   styleUrls: ['./doctors-page.component.css']
 })
-export class DoctorsPageComponent {
+export class DoctorsPageComponent implements OnInit {
 
   doctors: Doctor[] = [];
   nameFilter: string = "";
@@ -19,12 +20,13 @@ export class DoctorsPageComponent {
     defaultTitle: "Specializations"
   }
 
-  constructor(private doctorService: DoctorService, private specializationService: SpecializationService) {
+  constructor(private doctorService: DoctorService, private specializationService: SpecializationService,
+              private consultationService: ConsultationService) {
   }
 
   ngOnInit() {
     this.doctorService.getDoctors()
-      .subscribe(doctors => this.doctors= doctors);
+      .subscribe(doctors => this.doctors = doctors);
     this.specializationService.getSpecializations()
       .subscribe(specializations => {
         this.specializationOptions = specializations;
@@ -40,5 +42,9 @@ export class DoctorsPageComponent {
   onChangeSpecializations() {
     this.doctorService.getDoctorsWithFilters(this.nameFilter, this.specializationIdsFilter)
       .subscribe(doctors => this.doctors = doctors);
+  }
+
+  chooseConsultation(consultationId: number) {
+    this.consultationService.chooseConsultation(consultationId);
   }
 }

@@ -21,6 +21,11 @@
         </a>
       </li>
       <li *ngIf="isLoggedIn">
+        <a routerLink="/profile">
+          Personal profile
+        </a>
+      </li>
+      <li *ngIf="isLoggedIn">
         <a (click)="logout()">
           Logout
         </a>

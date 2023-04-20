@@ -30,7 +30,7 @@ export class TokenService {
   }
 
   public getDecodedAccessToken(): any {
-    return jwtDecode(localStorage.getItem(ACCESS_TOKEN));
+    return localStorage.getItem(ACCESS_TOKEN) === null ? null : jwtDecode(localStorage.getItem(ACCESS_TOKEN));
   }
 
   public getRefreshToken(): any {
@@ -38,31 +38,35 @@ export class TokenService {
   }
 
   public getDecodedRefreshToken(): any {
-    return jwtDecode(localStorage.getItem(REFRESH_TOKEN));
+    return localStorage.getItem(REFRESH_TOKEN) === null ? null : localStorage.getItem(REFRESH_TOKEN);
   }
 
   public isLoggedIn(): boolean {
-    if (localStorage.getItem(ACCESS_TOKEN)) {
-      return true;
+    if (this.isAccessTokenExpired()) {
+      return false;
     }
     return false;
   }
 
   public isAccessTokenExpired(): boolean {
-    const expiryTime = this.getDecodedAccessToken()['exp'];
-    if (expiryTime) {
-      return expiryTime * 1000 - new Date().getTime() < 0;
-    } else {
-      return false;
+    let accessToken = this.getDecodedAccessToken();
+    if (accessToken) {
+      const expiryTime = accessToken['exp'];
+      if (expiryTime) {
+        return expiryTime * 1000 - new Date().getTime() < 0;
+      }
     }
+    return true;
   }
 
   public isRefreshTokenExpired(): boolean {
-    const expiryTime = this.getDecodedAccessToken()['exp'];
-    if (expiryTime) {
-      return expiryTime * 1000 - new Date().getTime() < 5000;
-    } else {
-      return false;
+    let refreshToken = this.getDecodedRefreshToken();
+    if (refreshToken) {
+      const expiryTime = refreshToken['exp'];
+      if (expiryTime) {
+        return expiryTime * 1000 - new Date().getTime() < 5000;
+      }
     }
+    return true;
   }
 }

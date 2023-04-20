@@ -15,7 +15,7 @@ export class SiteLayoutComponent implements OnInit{
   }
 
   check() {
-    this.storageService.isRefreshTokenExpired();
+    this.storageService.isAccessTokenExpired();
   }
 
   logout() {
@@ -25,6 +25,6 @@ export class SiteLayoutComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.storageService.isLoggedIn();
+    this.isLoggedIn = !this.storageService.isAccessTokenExpired();
   }
 }

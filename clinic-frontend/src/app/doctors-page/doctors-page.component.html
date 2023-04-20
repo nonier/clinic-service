@@ -53,7 +53,9 @@
         </div>
         <ul class="consultations">
           <li class="consultation" *ngFor="let consultation of doctor.consultations | freeConsultation">
-            <a class="waves-effect waves-light btn">{{consultation.date | date:'medium'}}</a>
+            <a class="waves-effect waves-light btn"
+            (click)="chooseConsultation(consultation.id)">
+              {{consultation.date | date:'medium'}}</a>
           </li>
         </ul>
       </div>

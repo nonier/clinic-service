@@ -2,13 +2,16 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Doctor} from "../../model/Doctor";
+import {TokenService} from "../storage/storage.servise";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private tokenService: TokenService,
+              private router: Router) {
   }
 
   getDoctors(): Observable<Doctor[]> {

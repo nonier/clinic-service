@@ -32,19 +32,6 @@
           </span>
       </span>
     </div>
-    <div class="input-field">
-      <input id="confirm-password"
-             type="password"
-             formControlName="confirmPassword"
-             placeholder="confirm password"
-             [ngClass]="{'invalid':form.get('confirmPassword').invalid && form.get('confirmPassword').touched}"/>
-      <span class="helper-text red-text" *ngIf="form.get('confirmPassword').invalid && form.get('confirmPassword').touched">
-          <span *ngIf="form.get('confirmPassword').errors['required']">Retype password</span>
-          <span *ngIf="form.get('confirmPassword').errors['notEquivalent']">
-            Passwords not the same
-          </span>
-      </span>
-    </div>
     <button type="submit"
             [disabled]="form.invalid">
       Register
