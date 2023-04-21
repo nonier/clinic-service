@@ -3,7 +3,7 @@ import {Doctor} from "../model/Doctor";
 import {DoctorService} from "../service/doctor/doctor.service";
 import {IMultiSelectOption, IMultiSelectTexts} from "ngx-bootstrap-multiselect";
 import {SpecializationService} from "../service/specialization/specialization.service";
-import {ConsultationService} from "../service/consultation/consultation.service";
+import {ClientService} from "../service/client/client.service";
 
 @Component({
   selector: 'app-doctors-page',
@@ -21,7 +21,7 @@ export class DoctorsPageComponent implements OnInit {
   }
 
   constructor(private doctorService: DoctorService, private specializationService: SpecializationService,
-              private consultationService: ConsultationService) {
+              private clientService: ClientService) {
   }
 
   ngOnInit() {
@@ -45,6 +45,6 @@ export class DoctorsPageComponent implements OnInit {
   }
 
   chooseConsultation(consultationId: number) {
-    this.consultationService.chooseConsultation(consultationId);
+    this.clientService.chooseConsultation(consultationId);
   }
 }

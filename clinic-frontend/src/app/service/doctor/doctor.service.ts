@@ -4,6 +4,9 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Doctor} from "../../model/Doctor";
 import {TokenService} from "../storage/storage.servise";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
+
+const DOCTOR_API_URL = environment.apiHost + '/doctors';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +18,13 @@ export class DoctorService {
   }
 
   getDoctors(): Observable<Doctor[]> {
-    return this.http.get<Doctor[]>("http://localhost:8080/api/doctors");
+    return this.http.get<Doctor[]>(DOCTOR_API_URL);
   }
 
   getDoctorsWithFilters(name: string, specializationIds: number[]): Observable<Doctor[]> {
     let params = new HttpParams()
       .set('name', name)
       .set('specializationIds', specializationIds.join(','));
-    return this.http.get<Doctor[]>("http://localhost:8080/api/doctors/filter", {params});
+    return this.http.get<Doctor[]>(DOCTOR_API_URL + '/filter', {params});
   }
 }

@@ -23,15 +23,6 @@ public class ConsultationController {
         return ResponseEntity.ok(consultationService.findAll());
     }
 
-    /**
-     * Возможно стоит сделать отдельный контроллер для клиентов вместо этого
-     */
-    @GetMapping("/client")
-    public ResponseEntity<List<ConsultationDto>> findAllForClient(Principal principal) {
-        List<ConsultationDto> result = consultationService.findAllForClient(principal);
-        return ResponseEntity.ok(result);
-    }
-
     @GetMapping("/doctors/{doctorId}")
     public ResponseEntity<List<ConsultationDto>> findAllByDoctorId(@PathVariable Long doctorId) {
         return ResponseEntity.ok(consultationService.findAllByDoctorId(doctorId));
@@ -41,13 +32,4 @@ public class ConsultationController {
     public ResponseEntity<ConsultationDto> create(@Validated @RequestBody ConsultationUpdateDto dto) {
         return ResponseEntity.ok(consultationService.create(dto));
     }
-
-    @PutMapping("/{consultationId}")
-    public ResponseEntity<Void> chooseConsultationByClient(
-            @PathVariable Long consultationId,
-            Principal principal) {
-        consultationService.chooseConsultationByClient(consultationId, principal);
-        return ResponseEntity.ok().build();
-    }
-
 }

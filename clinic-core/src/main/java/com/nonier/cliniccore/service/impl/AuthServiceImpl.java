@@ -2,6 +2,7 @@ package com.nonier.cliniccore.service.impl;
 
 import com.nonier.cliniccore.dto.RegistrationDto;
 import com.nonier.cliniccore.entity.User;
+import com.nonier.cliniccore.jwt.JwtAuthentication;
 import com.nonier.cliniccore.jwt.JwtProvider;
 import com.nonier.cliniccore.jwt.JwtRequest;
 import com.nonier.cliniccore.jwt.JwtResponse;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,5 +91,11 @@ public class AuthServiceImpl implements AuthService {
         user.setUsername(registrationDto.getUsername());
         user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
         userRepository.save(user);
+    }
+
+    @Override
+    public User getUser(Principal principal) {
+        return userRepository.findByUsername(((JwtAuthentication) principal).getUsername())
+                .orElseThrow(() -> new EntityNotFoundException("User with username: %s not found!".formatted(principal.getName())));
     }
 }

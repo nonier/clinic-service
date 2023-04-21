@@ -11,7 +11,7 @@ const REFRESH_TOKEN = 'refresh-token';
 })
 export class TokenService {
 
-  constructor(private http: HttpClient) {
+  constructor() {
   }
 
   clean(): void {

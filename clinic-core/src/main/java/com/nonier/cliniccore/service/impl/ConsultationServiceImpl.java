@@ -50,19 +50,15 @@ public class ConsultationServiceImpl implements ConsultationService {
     }
 
     @Override
-    public void chooseConsultationByClient(Long consultationId, Principal principal) {
-        User user = userRepository.findByUsername(((JwtAuthentication) principal).getUsername())
-                .orElseThrow(() -> new EntityNotFoundException("User with username: %s not found!".formatted(principal.getName())));
+    public void chooseConsultationByClient(Long consultationId, User client) {
         Consultation consultation = consultationRepository.findById(consultationId)
                 .orElseThrow(() -> new EntityNotFoundException("Consultation with id: %d not found!".formatted(consultationId)));
-        consultation.setClient(user);
+        consultation.setClient(client);
         consultationRepository.save(consultation);
     }
 
     @Override
-    public List<ConsultationDto> findAllForClient(Principal principal) {
-        User user = userRepository.findByUsername(((JwtAuthentication) principal).getUsername())
-                .orElseThrow(() -> new EntityNotFoundException("User with username: %s not found!".formatted(principal.getName())));
+    public List<ConsultationDto> findAllForClient(User user) {
         return consultationRepository.findAllByClient_id(user.getId())
                 .stream()
                 .map(consultationMapper::consultation2ConsultationDto)

@@ -1,8 +1,11 @@
 package com.nonier.cliniccore.service;
 
 import com.nonier.cliniccore.dto.RegistrationDto;
+import com.nonier.cliniccore.entity.User;
 import com.nonier.cliniccore.jwt.JwtRequest;
 import com.nonier.cliniccore.jwt.JwtResponse;
+
+import java.security.Principal;
 
 public interface AuthService {
 
@@ -13,4 +16,6 @@ public interface AuthService {
     JwtResponse refresh(String refreshToken);
 
     void register(RegistrationDto registrationDto);
+
+    User getUser(Principal principal);
 }
