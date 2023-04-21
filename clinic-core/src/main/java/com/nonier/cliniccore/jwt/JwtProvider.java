@@ -1,7 +1,5 @@
 package com.nonier.cliniccore.jwt;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nonier.cliniccore.dto.RoleDto;
 import com.nonier.cliniccore.entity.Role;
 import com.nonier.cliniccore.entity.User;
 import com.nonier.cliniccore.repository.RoleRepository;
@@ -66,7 +64,7 @@ public class JwtProvider {
 
     public String generateAccessToken(@NonNull User user) {
         final LocalDateTime now = LocalDateTime.now();
-        final Instant accessExpirationInstant = now.plusMinutes(5).atZone(ZoneId.systemDefault()).toInstant();
+        final Instant accessExpirationInstant = now.plusMinutes(30).atZone(ZoneId.systemDefault()).toInstant();
         final Date accessExpiration = Date.from(accessExpirationInstant);
         return Jwts.builder()
                 .setSubject(user.getUsername())

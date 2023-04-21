@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../service/auth/auth.service";
 import {Router} from "@angular/router";
-import {TokenService} from "../service/storage/storage.servise";
+import {TokenService} from "../service/token/token.servise";
 
 @Component({
   selector: 'app-login-page',
@@ -15,7 +15,7 @@ export class LoginPageComponent implements OnInit {
   isLoggedIn = false;
 
   constructor(private auth: AuthService, private tokenService: TokenService, private router: Router) {
-    this.isLoggedIn = tokenService.isLoggedIn();
+    this.isLoggedIn = !tokenService.isAccessTokenExpired();
   }
 
   ngOnInit(): void {

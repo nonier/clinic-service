@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {TokenService} from "../../../service/storage/storage.servise";
+import {TokenService} from "../../../service/token/token.servise";
 import {Router} from "@angular/router";
 
 @Component({
@@ -7,24 +7,24 @@ import {Router} from "@angular/router";
   templateUrl: './site-layout.component.html',
   styleUrls: ['./site-layout.component.css']
 })
-export class SiteLayoutComponent implements OnInit{
+export class SiteLayoutComponent implements OnInit {
 
   isLoggedIn = false;
 
-  constructor(private storageService:TokenService, private router: Router) {
+  constructor(private tokenService: TokenService, private router: Router) {
   }
 
   check() {
-    this.storageService.isAccessTokenExpired();
+    console.log(this.tokenService.isRefreshTokenExpired());
   }
 
   logout() {
     this.isLoggedIn = false;
-    this.storageService.clean();
+    this.tokenService.clean();
     this.router.navigateByUrl("/");
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = !this.storageService.isAccessTokenExpired();
+    this.isLoggedIn = !this.tokenService.isAccessTokenExpired();
   }
 }

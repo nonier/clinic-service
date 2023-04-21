@@ -1,7 +1,9 @@
-import {Injectable} from "@angular/core";
+import {Injectable, OnInit} from "@angular/core";
 import jwtDecode from "jwt-decode";
 import {TokenResponse} from "../../model/TokenResponse";
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
+import {Observable} from "rxjs";
 
 const ACCESS_TOKEN = 'access-token';
 const REFRESH_TOKEN = 'refresh-token';
@@ -9,13 +11,19 @@ const REFRESH_TOKEN = 'refresh-token';
 @Injectable({
   providedIn: 'root'
 })
-export class TokenService {
+export class TokenService implements OnInit {
 
-  constructor() {
+  constructor(private http: HttpClient) {
+  }
+
+
+  ngOnInit(): void {
+    this.clean();
   }
 
   clean(): void {
-    localStorage.clear();
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
   }
 
   public saveTokens(tokenResponse: TokenResponse): void {
@@ -23,6 +31,11 @@ export class TokenService {
     localStorage.removeItem(REFRESH_TOKEN);
     localStorage.setItem(ACCESS_TOKEN, tokenResponse.accessToken);
     localStorage.setItem(REFRESH_TOKEN, tokenResponse.refreshToken);
+  }
+
+  public saveAccessToken(accessToken: string) {
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.setItem(ACCESS_TOKEN, accessToken);
   }
 
   public getAccessToken(): any {
@@ -38,14 +51,7 @@ export class TokenService {
   }
 
   public getDecodedRefreshToken(): any {
-    return localStorage.getItem(REFRESH_TOKEN) === null ? null : localStorage.getItem(REFRESH_TOKEN);
-  }
-
-  public isLoggedIn(): boolean {
-    if (this.isAccessTokenExpired()) {
-      return false;
-    }
-    return false;
+    return localStorage.getItem(REFRESH_TOKEN) === null ? null : jwtDecode(localStorage.getItem(REFRESH_TOKEN));
   }
 
   public isAccessTokenExpired(): boolean {
@@ -57,6 +63,10 @@ export class TokenService {
       }
     }
     return true;
+  }
+
+  public refreshAccessToken(): Observable<TokenResponse> {
+    return this.http.post<TokenResponse>(environment.apiHost + '/auth/token', {refreshToken: this.getRefreshToken()});
   }
 
   public isRefreshTokenExpired(): boolean {

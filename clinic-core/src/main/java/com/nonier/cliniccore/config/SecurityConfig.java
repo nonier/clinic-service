@@ -43,8 +43,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/login").permitAll()
-                                .requestMatchers("/register").permitAll()
+                        req.requestMatchers("/auth/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/doctors/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/specializations/**").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/consultations/**").permitAll()

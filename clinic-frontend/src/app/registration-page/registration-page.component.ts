@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import { FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../service/auth/auth.service";
 import {Router} from "@angular/router";
-import {TokenService} from "../service/storage/storage.servise";
+import {TokenService} from "../service/token/token.servise";
 
 @Component({
   selector: 'app-registration-page',
@@ -13,9 +13,9 @@ export class RegistrationPageComponent {
 
   form: FormGroup;
   isLoggedIn = false;
-  
+
   constructor(private auth: AuthService, private tokenService: TokenService, private router: Router) {
-    this.isLoggedIn = tokenService.isLoggedIn();
+    this.isLoggedIn = !tokenService.isAccessTokenExpired();
   }
 
   ngOnInit(): void {
