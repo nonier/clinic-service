@@ -3,13 +3,13 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">My info</span>
-        <p>
+        <p *ngIf="user != undefined">
           Name: {{user.name}}
         </p>
-        <p>
+        <p *ngIf="user != undefined">
           Surname: {{user.surname}}
         </p>
-        <p>
+        <p *ngIf="user != undefined">
           BirthDate: {{user.birthDate}}
         </p>
       </div>

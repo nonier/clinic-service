@@ -7,14 +7,12 @@ import {DoctorsPageComponent} from "./doctors-page/doctors-page.component";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
 
 const routes: Routes = [
-  {path: 'auth', component: SiteLayoutComponent, children: [
-      {path: 'login', component: LoginPageComponent},
-      {path: 'registration', component: RegistrationPageComponent}
-    ]},
   {path: '', component: SiteLayoutComponent, children: [
       {path: '', redirectTo: '/doctors', pathMatch: 'full'},
       {path: 'doctors', component: DoctorsPageComponent},
-      {path: 'profile', component: ProfilePageComponent}
+      {path: 'profile', component: ProfilePageComponent},
+      {path: 'login', component: LoginPageComponent},
+      {path: 'registration', component: RegistrationPageComponent}
     ]},
   {path: '**', redirectTo: ''}
 ];

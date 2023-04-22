@@ -31,6 +31,6 @@ export class RegistrationPageComponent {
       password: this.form.value.password
     };
     this.auth.register(user)
-      .subscribe(result => this.router.navigateByUrl("/auth/login"));
+      .subscribe(result => this.router.navigateByUrl("/login"));
   }
 }

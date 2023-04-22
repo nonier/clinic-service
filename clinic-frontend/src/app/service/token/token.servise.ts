@@ -66,7 +66,7 @@ export class TokenService implements OnInit {
   }
 
   public refreshAccessToken(): Observable<TokenResponse> {
-    return this.http.post<TokenResponse>(environment.apiHost + '/auth/token', {refreshToken: this.getRefreshToken()});
+    return this.http.post<TokenResponse>(environment.apiHost + '/auth/token/access', {refreshToken: this.getRefreshToken()});
   }
 
   public isRefreshTokenExpired(): boolean {

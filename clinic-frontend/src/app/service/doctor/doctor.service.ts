@@ -13,8 +13,7 @@ const DOCTOR_API_URL = environment.apiHost + '/doctors';
 })
 export class DoctorService {
 
-  constructor(private http: HttpClient, private tokenService: TokenService,
-              private router: Router) {
+  constructor(private http: HttpClient) {
   }
 
   getDoctors(): Observable<Doctor[]> {

@@ -58,7 +58,7 @@ public class AuthServiceImpl implements AuthService {
                 return new JwtResponse(accessToken, null);
             }
         }
-        return new JwtResponse(null, null);
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "invalid refresh token");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.nonier.cliniccore.config;
 
 import com.nonier.cliniccore.jwt.JwtFilter;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,9 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -46,7 +47,7 @@ public class SecurityConfig {
                         req.requestMatchers("/auth/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/doctors/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/specializations/**").permitAll()
-                                .requestMatchers(HttpMethod.GET,"/consultations/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/consultations/**").permitAll()
                                 .requestMatchers("/clients/**").authenticated()
                                 .requestMatchers("/users/**").hasAuthority("ADMIN")
                                 .requestMatchers("/role/**").hasAuthority("ADMIN")
@@ -56,7 +57,16 @@ public class SecurityConfig {
                                 .requestMatchers("/actuator/**").authenticated()
                                 .anyRequest().denyAll())
                 .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint())
+                .and()
                 .build();
+    }
+
+    @Bean
+    AuthenticationEntryPoint jwtAuthenticationEntryPoint() {
+        return (request, response, authException) ->
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
     }
 
     @Bean
