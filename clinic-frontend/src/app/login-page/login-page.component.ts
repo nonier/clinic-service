@@ -15,6 +15,7 @@ export class LoginPageComponent implements OnInit {
   isLoggedIn = false;
 
   constructor(private auth: AuthService, private tokenService: TokenService, private router: Router) {
+    tokenService.isLoggedIn.subscribe((isLoggedId) => this.isLoggedIn = isLoggedId);
     this.isLoggedIn = !tokenService.isAccessTokenExpired();
   }
 
@@ -32,7 +33,6 @@ export class LoginPageComponent implements OnInit {
     };
     this.auth.login(user).subscribe(
       token => {
-        this.isLoggedIn = true;
         this.tokenService.saveTokens(token);
         this.router.navigateByUrl("/");
       }

@@ -3,7 +3,7 @@ import jwtDecode from "jwt-decode";
 import {TokenResponse} from "../../model/TokenResponse";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 
 const ACCESS_TOKEN = 'access-token';
 const REFRESH_TOKEN = 'refresh-token';
@@ -12,6 +12,8 @@ const REFRESH_TOKEN = 'refresh-token';
   providedIn: 'root'
 })
 export class TokenService implements OnInit {
+
+  isLoggedIn: Subject<boolean> = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) {
   }
@@ -22,11 +24,13 @@ export class TokenService implements OnInit {
   }
 
   clean(): void {
+    this.isLoggedIn.next(false);
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(REFRESH_TOKEN);
   }
 
   public saveTokens(tokenResponse: TokenResponse): void {
+    this.isLoggedIn.next(true);
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(REFRESH_TOKEN);
     localStorage.setItem(ACCESS_TOKEN, tokenResponse.accessToken);
@@ -34,6 +38,7 @@ export class TokenService implements OnInit {
   }
 
   public saveAccessToken(accessToken: string) {
+    this.isLoggedIn.next(true);
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.setItem(ACCESS_TOKEN, accessToken);
   }

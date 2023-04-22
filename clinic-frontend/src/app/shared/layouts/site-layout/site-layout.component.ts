@@ -12,6 +12,7 @@ export class SiteLayoutComponent implements OnInit {
   isLoggedIn = false;
 
   constructor(private tokenService: TokenService, private router: Router) {
+    tokenService.isLoggedIn.subscribe((isLoggedId) => this.isLoggedIn = isLoggedId);
   }
 
   check() {
@@ -19,7 +20,6 @@ export class SiteLayoutComponent implements OnInit {
   }
 
   logout() {
-    this.isLoggedIn = false;
     this.tokenService.clean();
     this.router.navigateByUrl("/");
   }
