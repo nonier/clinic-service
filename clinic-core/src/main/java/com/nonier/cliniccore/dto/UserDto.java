@@ -11,5 +11,5 @@ public class UserDto {
     private String username;
     private String name;
     private String surname;
-    private List<RoleDto> roleDtos;
+    private List<RoleDto> roles;
 }

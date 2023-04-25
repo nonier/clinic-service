@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenService} from "../../../service/token/token.servise";
 import {Router} from "@angular/router";
+import {AuthService} from "../../../service/auth/auth.service";
 
 @Component({
   selector: 'app-site-layout',
@@ -11,12 +12,12 @@ export class SiteLayoutComponent implements OnInit {
 
   isLoggedIn = false;
 
-  constructor(private tokenService: TokenService, private router: Router) {
+  constructor(private tokenService: TokenService, private router: Router, private authService: AuthService) {
     tokenService.isLoggedIn.subscribe((isLoggedId) => this.isLoggedIn = isLoggedId);
   }
 
   check() {
-    console.log(this.tokenService.isRefreshTokenExpired());
+    this.authService.getCurrentUser();
   }
 
   logout() {

@@ -12,6 +12,7 @@ import {RegistrationPageComponent} from './registration-page/registration-page.c
 import {DoctorsPageComponent} from './doctors-page/doctors-page.component';
 import {AuthInterceptor} from "./interseptor/AuthInterseptor";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
+import {RoleNamePipe} from './pipe/role-name.pipe';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {ProfilePageComponent} from "./profile-page/profile-page.component";
     SiteLayoutComponent,
     RegistrationPageComponent,
     DoctorsPageComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    RoleNamePipe,
   ],
   imports: [
     BrowserModule,

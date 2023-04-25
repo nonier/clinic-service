@@ -7,23 +7,25 @@ import {DoctorsPageComponent} from "./doctors-page/doctors-page.component";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
 
 const routes: Routes = [
-  {path: '', component: SiteLayoutComponent, children: [
+  {
+    path: '', component: SiteLayoutComponent, children: [
       {path: '', redirectTo: '/doctors', pathMatch: 'full'},
       {path: 'doctors', component: DoctorsPageComponent},
       {path: 'profile', component: ProfilePageComponent},
       {path: 'login', component: LoginPageComponent},
       {path: 'registration', component: RegistrationPageComponent}
-    ]},
+    ]
+  },
   {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
-  exports: [
-    RouterModule
-  ]
+    imports: [
+      RouterModule.forRoot(routes)
+    ],
+    exports: [
+      RouterModule
+    ]
   }
 )
 export class AppRoutingModule {

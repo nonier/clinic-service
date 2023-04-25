@@ -11,7 +11,19 @@ import {environment} from "../../../environments/environment";
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private storageService: TokenService) {
+  constructor(private http: HttpClient, private tokenService: TokenService) {
+  }
+
+  getCurrentUser(): User {
+    let accessToken = this.tokenService.getDecodedAccessToken();
+    if (accessToken) {
+      let user = {
+        name: accessToken['name'],
+        roles: accessToken['roles']
+      };
+      return user;
+    }
+    return null;
   }
 
   login(user: User): Observable<TokenResponse> {
@@ -29,6 +41,6 @@ export class AuthService {
   }
 
   logout() {
-    this.storageService.clean();
+    this.tokenService.clean();
   }
 }

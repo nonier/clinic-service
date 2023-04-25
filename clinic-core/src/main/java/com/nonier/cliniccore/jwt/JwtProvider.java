@@ -48,7 +48,7 @@ public class JwtProvider {
     public JwtAuthentication generate(Claims claims) {
         JwtAuthentication jwtAuthentication = new JwtAuthentication();
         jwtAuthentication.setUsername(claims.getSubject());
-        jwtAuthentication.setFirstName(claims.get("firstName", String.class));
+        jwtAuthentication.setName(claims.get("name", String.class));
         jwtAuthentication.setRoles(new HashSet<>(getRoles(claims)));
         return jwtAuthentication;
     }
@@ -57,7 +57,7 @@ public class JwtProvider {
     private List<Role> getRoles(Claims claims) {
         List<Long> rolesIds = (claims.get("roles", List.class))
                 .stream()
-                .map(map -> Integer.toUnsignedLong((Integer)(((HashMap) map).get("id"))))
+                .map(map -> Integer.toUnsignedLong((Integer) (((HashMap) map).get("id"))))
                 .toList();
         return roleRepository.findAllById(rolesIds);
     }
@@ -71,7 +71,7 @@ public class JwtProvider {
                 .setExpiration(accessExpiration)
                 .signWith(jwtAccessSecret)
                 .claim("roles", roleService.findRolesByUser(user.getId()))
-                .claim("firstName", user.getName())
+                .claim("name", user.getName())
                 .compact();
     }
 

@@ -23,4 +23,7 @@ export class ProfilePageComponent implements OnInit {
       .subscribe(user => this.user = user);
   }
 
+  isAppointedTimeCome(date: Date): boolean {
+    return new Date(date) < new Date();
+  }
 }
