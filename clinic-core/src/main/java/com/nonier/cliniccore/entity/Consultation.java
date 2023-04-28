@@ -28,4 +28,8 @@ public class Consultation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private User client;
+
+    @ManyToOne
+    @JoinColumn(name = "dialog_id", referencedColumnName = "id")
+    private Dialog dialog;
 }

@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 public class MessageUpdateDto {
 
-    private Long id;
     @NotBlank
     private String text;
     @NotNull

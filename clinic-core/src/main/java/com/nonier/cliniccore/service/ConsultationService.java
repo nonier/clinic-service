@@ -18,4 +18,6 @@ public interface ConsultationService {
     void chooseConsultationByClient(Long consultationId, User client);
 
     List<ConsultationDto> findAllForClient(User user);
+
+    List<ConsultationDto> findByDoctor(Principal principal);
 }

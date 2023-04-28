@@ -18,9 +18,14 @@ CREATE TABLE review
 --changeset dilyin:3
 CREATE TABLE consultation
 (
-    id      BIGSERIAL PRIMARY KEY,
-    date    TIMESTAMP NOT NULL,
-    doctor_id BIGINT REFERENCES doctor(id),
-    client_id BIGINT REFERENCES users (id)
+    id        BIGSERIAL PRIMARY KEY,
+    date      TIMESTAMP NOT NULL,
+    doctor_id BIGINT REFERENCES doctor (id),
+    client_id BIGINT REFERENCES users (id),
+    dialog_id BIGINT REFERENCES dialog (id)
 );
 --rollback DROP TABLE consultation;
+
+--changeset dilyin:4
+INSERT INTO consultation(date, doctor_id)
+VALUES ('2001-02-16 20:38:40', 1);

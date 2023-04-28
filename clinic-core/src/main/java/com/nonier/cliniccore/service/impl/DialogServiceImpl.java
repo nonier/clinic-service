@@ -37,7 +37,13 @@ public class DialogServiceImpl implements DialogService {
 
     @Override
     public DialogDto create(DialogUpdateDto dto) {
-        List<User> users = dto.getUserIds()
+        Dialog dialog = createByUsers(dto.getUserIds());
+        return dialogMapper.dialog2DialogDto(dialog);
+    }
+
+    @Override
+    public Dialog createByUsers(List<Long> userIds) {
+        List<User> users = userIds
                 .stream()
                 .map(id -> userRepository.findById(id)
                         .orElseThrow(() -> new EntityNotFoundException("User with id: %d not found!".formatted(id))))
@@ -48,8 +54,8 @@ public class DialogServiceImpl implements DialogService {
                         .dialog(dialog)
                         .user(user)
                         .build())
-                        .toList();
+                .toList();
         dialog.setUserDialogs(userDialogRepository.saveAll(userDialogs));
-        return dialogMapper.dialog2DialogDto(dialog);
+        return dialogRepository.save(dialog);
     }
 }

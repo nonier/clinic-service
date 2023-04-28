@@ -25,9 +25,10 @@
     <div class="collection">
       <div class="collection-item" *ngFor="let consultation of consultations">
         <div>
-          Time: {{consultation.date}}
+          Time: {{consultation.date | date:'medium'}}
         </div>
-        <a class="waves-effect waves-light btn" *ngIf="isAppointedTimeCome(consultation.date)">
+        <a class="waves-effect waves-light btn" *ngIf="isAppointedTimeCome(consultation.date)"
+           [routerLink]="['/dialog',consultation.id]">
           Enter to chat
         </a>
         <!--        <a class="waves-effect waves-light btn">-->

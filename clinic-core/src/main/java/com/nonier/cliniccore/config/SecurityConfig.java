@@ -44,7 +44,9 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/auth/**").permitAll()
+                        req.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                .requestMatchers("/ws/**").permitAll()
+                                .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/doctors/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/specializations/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/consultations/**").permitAll()
@@ -72,9 +74,10 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
         configuration.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

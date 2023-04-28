@@ -13,6 +13,7 @@ import {DoctorsPageComponent} from './doctors-page/doctors-page.component';
 import {AuthInterceptor} from "./interseptor/AuthInterseptor";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
 import {RoleNamePipe} from './pipe/role-name.pipe';
+import { DialogPageComponent } from './dialog-page/dialog-page.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {RoleNamePipe} from './pipe/role-name.pipe';
     DoctorsPageComponent,
     ProfilePageComponent,
     RoleNamePipe,
+    DialogPageComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,7 @@ import {RoleNamePipe} from './pipe/role-name.pipe';
     AppRoutingModule,
     FormsModule,
     NgxBootstrapMultiselectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

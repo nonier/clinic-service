@@ -17,7 +17,7 @@ export class SiteLayoutComponent implements OnInit {
   }
 
   check() {
-    this.authService.getCurrentUser();
+    console.log(this.authService.getCurrentUser());
   }
 
   logout() {

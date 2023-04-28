@@ -19,6 +19,7 @@ export class AuthService {
     if (accessToken) {
       let user = {
         name: accessToken['name'],
+        username: accessToken['sub'],
         roles: accessToken['roles']
       };
       return user;
