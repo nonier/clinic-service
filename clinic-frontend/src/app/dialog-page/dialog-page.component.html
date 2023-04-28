@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="collection">
+    <div class="collection-item" *ngFor="let message of messages">
+      <div class="message">
+        {{message.text}}
+        {{message.creationDate}}
+        {{message.userFrom}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="input-field col s12">
+  <input #textInput type="text" placeholder="send message">
+</div>
+
+<button (click)="sendMessage(textInput.value)">Send Message</button>

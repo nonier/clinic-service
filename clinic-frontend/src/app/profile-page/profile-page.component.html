@@ -28,12 +28,9 @@
           Time: {{consultation.date | date:'medium'}}
         </div>
         <a class="waves-effect waves-light btn" *ngIf="isAppointedTimeCome(consultation.date)"
-           [routerLink]="['/dialog',consultation.id]">
+           [routerLink]="['/dialog',consultation.dialogId]">
           Enter to chat
         </a>
-        <!--        <a class="waves-effect waves-light btn">-->
-        <!--          Show history-->
-        <!--        </a>-->
       </div>
     </div>
   </div>

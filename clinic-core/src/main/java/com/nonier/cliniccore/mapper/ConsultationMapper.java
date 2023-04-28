@@ -14,6 +14,7 @@ public interface ConsultationMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "date", source = "date")
     @Mapping(target = "client", source = "client")
+    @Mapping(target = "dialogId", source = "dialog.id")
     ConsultationDto consultation2ConsultationDto(Consultation consultation);
 
     @Mapping(target = "id", ignore = true)

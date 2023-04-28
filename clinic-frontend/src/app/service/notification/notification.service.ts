@@ -5,6 +5,7 @@ import {environment} from "../../../environments/environment";
 import {TokenService} from "../token/token.servise";
 import {Message} from "../../model/Message";
 import {Injectable} from "@angular/core";
+import {DataService} from "../data/data.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,14 @@ export class NotificationService {
   stompClient: any;
   topic: string
 
-  constructor(private authService:AuthService, private tokenService: TokenService) {
+  constructor(private authService:AuthService, private tokenService: TokenService,
+              private dataService: DataService) {
   }
 
   subscribe() {
     console.log(this.authService.getCurrentUser().username)
-    this.topic = `/notifications/${this.authService.getCurrentUser().username}`
+    this.topic = `/notifications/${this.authService.getCurrentUser().id}`
+    console.log(this.topic);
     let ws = new SockJS(`${environment.apiHost}/ws`);
     this.stompClient = Stomp.over(ws);
     this.stompClient.debug = () => {};
@@ -34,16 +37,13 @@ export class NotificationService {
 
   onMessageReceived(message) {
     let json = JSON.parse(message.body)
-    if (json['type'] == "USER_MESSAGE_ADDED") {
-      let data = json['data'] as Message
-      // this..updateUserMessages([data])
+    if (json['type'] == "NEW_MESSAGE") {
+      let data = json['body'] as Message;
+      this.dataService.updateMessages([data]);
       console.log('message recieved' + message);
     }
-    // else if (json['type'] == "USER_CONVERSATION_UPDATED" || json['type'] == "USER_CONVERSATION_ADDED") {
-    //   let data = json['data'] as FriendProfile
-    //   this.dataService.updateFriends([data])
     else {
-      console.log(json)
+      console.log(json);
     }
   }
 

@@ -8,7 +8,7 @@ VALUES ('ADMIN'),
 
 --changeset dilyin:2
 INSERT INTO users(id, username, password, name, surname)
-VALUES (1, 'dummyAdmin', '$2a$10$GRo6dSssomqOnxzHvgA6ievYOKm4Jszgo0e2.DpjXMbLRXp7NXQyO', 'Admin', 'Admin'),
+VALUES (1, 'dummyAdmin', '$2a$10$jYO7hCsoTx/JhH0o6/T58.POI5B.kh7gJzT7kozOh4gOopOhaJ1bC', 'Admin', 'Admin'),
        (2, 'dummyUser', '$2a$10$1ifxJCBfgg/DyCZCI0ZN3uv3yJ2Knn2SD.I8QTiR9pGyUCIACHsYe', 'user', 'user');
 --rollback DELETE FROM users;
 

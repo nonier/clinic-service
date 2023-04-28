@@ -70,6 +70,7 @@ public class JwtProvider {
                 .setSubject(user.getUsername())
                 .setExpiration(accessExpiration)
                 .signWith(jwtAccessSecret)
+                .claim("userId", user.getId())
                 .claim("roles", roleService.findRolesByUser(user.getId()))
                 .claim("name", user.getName())
                 .compact();

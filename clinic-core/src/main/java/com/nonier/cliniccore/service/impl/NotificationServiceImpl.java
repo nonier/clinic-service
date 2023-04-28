@@ -23,9 +23,9 @@ public class NotificationServiceImpl implements NotificationService {
     public void sendNotificationToUsers(Notification<?> notification, Dialog dialog) {
         dialog.getUserDialogs().stream()
                 .map(UserDialog::getUser)
-                .map(User::getUsername)
-                .forEach(username -> {
-                    template.convertAndSend(CHANNEL_PREFIX + "/%s" .formatted(username),
+                .map(User::getId)
+                .forEach(id -> {
+                    template.convertAndSend(CHANNEL_PREFIX + "/%d" .formatted(id),
                             notification);
                 });
     }

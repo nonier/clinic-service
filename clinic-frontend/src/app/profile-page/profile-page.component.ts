@@ -5,6 +5,7 @@ import {User} from "../model/User";
 import {AuthService} from "../service/auth/auth.service";
 import {DoctorService} from "../service/doctor/doctor.service";
 import {Router} from "@angular/router";
+import {MessageService} from "../service/message/message.service";
 
 @Component({
   selector: 'app-profile-page',
@@ -17,7 +18,7 @@ export class ProfilePageComponent implements OnInit {
   user: User;
 
   constructor(private clientService: ClientService, private authService: AuthService,
-              private doctorService: DoctorService, private router: Router) {
+              private doctorService: DoctorService) {
   }
 
   ngOnInit(): void {

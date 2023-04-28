@@ -1,6 +1,7 @@
 package com.nonier.cliniccore.controller;
 
 import com.nonier.cliniccore.dto.ConsultationDto;
+import com.nonier.cliniccore.dto.MessageDto;
 import com.nonier.cliniccore.dto.UserDto;
 import com.nonier.cliniccore.service.ClientService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,11 @@ public class ClientController {
     @GetMapping("/consultations")
     public ResponseEntity<List<ConsultationDto>> findClientConsultations(Principal principal) {
         return ResponseEntity.ok(clientService.findClientConsultations(principal));
+    }
+
+    @GetMapping("/messages")
+    public ResponseEntity<List<MessageDto>> findClientMessages(Principal principal) {
+        return ResponseEntity.ok(clientService.findClientMessages(principal));
     }
 
     @PutMapping("/consultations/{consultationId}")

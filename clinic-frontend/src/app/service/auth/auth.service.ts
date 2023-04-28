@@ -18,6 +18,7 @@ export class AuthService {
     let accessToken = this.tokenService.getDecodedAccessToken();
     if (accessToken) {
       let user = {
+        id: accessToken['userId'],
         name: accessToken['name'],
         username: accessToken['sub'],
         roles: accessToken['roles']

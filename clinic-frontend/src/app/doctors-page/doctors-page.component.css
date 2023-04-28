@@ -64,6 +64,11 @@
   display: inline;
 }
 
+.btn {
+  margin: 0;
+  padding: 0;
+}
+
 .consultation:last-child {
   margin-right: 0;
 }

@@ -35,4 +35,8 @@ public class Message    {
     @JoinColumn(name = "user_from", referencedColumnName = "id")
     private User userFrom;
 
+    @PrePersist
+    private void prePersist() {
+        creationDate = LocalDateTime.now();
+    }
 }

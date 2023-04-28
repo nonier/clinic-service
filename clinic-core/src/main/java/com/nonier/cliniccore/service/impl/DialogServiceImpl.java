@@ -2,11 +2,14 @@ package com.nonier.cliniccore.service.impl;
 
 import com.nonier.cliniccore.dto.DialogDto;
 import com.nonier.cliniccore.dto.DialogUpdateDto;
+import com.nonier.cliniccore.dto.MessageDto;
 import com.nonier.cliniccore.entity.Dialog;
 import com.nonier.cliniccore.entity.User;
 import com.nonier.cliniccore.entity.UserDialog;
 import com.nonier.cliniccore.mapper.DialogMapper;
+import com.nonier.cliniccore.mapper.MessageMapper;
 import com.nonier.cliniccore.repository.DialogRepository;
+import com.nonier.cliniccore.repository.MessageRepository;
 import com.nonier.cliniccore.repository.UserDialogRepository;
 import com.nonier.cliniccore.repository.UserRepository;
 import com.nonier.cliniccore.service.DialogService;
@@ -28,6 +31,8 @@ public class DialogServiceImpl implements DialogService {
     private final DialogMapper dialogMapper;
     private final UserRepository userRepository;
     private final UserDialogRepository userDialogRepository;
+    private final MessageMapper messageMapper;
+    private final MessageRepository messageRepository;
 
     @Override
     public Page<DialogDto> findAll(Pageable pageable) {
@@ -57,5 +62,13 @@ public class DialogServiceImpl implements DialogService {
                 .toList();
         dialog.setUserDialogs(userDialogRepository.saveAll(userDialogs));
         return dialogRepository.save(dialog);
+    }
+
+    @Override
+    public List<MessageDto> findMessagesInDialog(Long dialogId) {
+        return messageRepository.findAllByDialog_Id(dialogId)
+                .stream()
+                .map(messageMapper::message2MessageDto)
+                .toList();
     }
 }
