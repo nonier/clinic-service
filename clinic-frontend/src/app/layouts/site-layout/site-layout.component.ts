@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {TokenService} from "../../../service/token/token.servise";
+import {TokenService} from "../../service/token.servise";
 import {Router} from "@angular/router";
-import {AuthService} from "../../../service/auth/auth.service";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-site-layout',

@@ -1,11 +1,11 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {LoginPageComponent} from "./login-page/login-page.component";
-import {SiteLayoutComponent} from "./shared/layouts/site-layout/site-layout.component";
-import {RegistrationPageComponent} from "./registration-page/registration-page.component";
-import {DoctorsPageComponent} from "./doctors-page/doctors-page.component";
-import {ProfilePageComponent} from "./profile-page/profile-page.component";
-import {DialogPageComponent} from "./dialog-page/dialog-page.component";
+import {LoginPageComponent} from "./pages/login-page/login-page.component";
+import {SiteLayoutComponent} from "./layouts/site-layout/site-layout.component";
+import {RegistrationPageComponent} from "./pages/registration-page/registration-page.component";
+import {DoctorsPageComponent} from "./pages/doctors-page/doctors-page.component";
+import {ProfilePageComponent} from "./pages/profile-page/profile-page.component";
+import {DialogPageComponent} from "./pages/dialog-page/dialog-page.component";
 
 const routes: Routes = [
   {

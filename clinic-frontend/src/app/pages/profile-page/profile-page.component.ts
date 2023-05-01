@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Consultation} from "../model/Consultation";
-import {ClientService} from "../service/client/client.service";
-import {User} from "../model/User";
-import {AuthService} from "../service/auth/auth.service";
-import {DoctorService} from "../service/doctor/doctor.service";
+import {Consultation} from "../../model/Consultation";
+import {ClientService} from "../../service/client.service";
+import {User} from "../../model/User";
+import {AuthService} from "../../service/auth.service";
+import {DoctorService} from "../../service/doctor.service";
 import {Router} from "@angular/router";
-import {MessageService} from "../service/message/message.service";
+import {MessageService} from "../../service/message.service";
 
 @Component({
   selector: 'app-profile-page',

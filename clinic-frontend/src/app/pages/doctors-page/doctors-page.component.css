@@ -1,0 +1,30 @@
+.doctor {
+  margin-bottom: 40px;
+}
+
+.doctor_card {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.doctor_avatar_block {
+  text-align: center;
+  margin-right: 20px;
+}
+
+.doctor_info_block {
+  width: 150px;
+}
+
+.doctor_name {
+  font-size: large;
+}
+
+.doctor_specializations_block {
+  word-wrap:break-word;
+  width: 300px;
+}
+
+.doctor_specializations {
+  display: inline;
+}

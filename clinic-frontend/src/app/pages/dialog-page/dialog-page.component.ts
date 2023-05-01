@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {NotificationService} from "../service/notification/notification.service";
+import {NotificationService} from "../../service/notification.service";
 import {ActivatedRoute} from "@angular/router";
-import {Message} from "../model/Message";
-import {MessageService} from "../service/message/message.service";
-import {AuthService} from "../service/auth/auth.service";
-import {UpdateMessage} from "../model/UpdateMessage";
+import {Message} from "../../model/Message";
+import {MessageService} from "../../service/message.service";
+import {AuthService} from "../../service/auth.service";
+import {UpdateMessage} from "../../model/UpdateMessage";
 
 @Component({
   selector: 'app-dialog-page',

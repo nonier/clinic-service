@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {environment} from "../../../environments/environment";
-import {Consultation} from "../../model/Consultation";
-import {User} from "../../model/User";
+import {environment} from "../../environments/environment";
+import {Consultation} from "../model/Consultation";
+import {User} from "../model/User";
 
 const CLIENT_API_URL = environment.apiHost + '/clients';
 
@@ -21,9 +21,7 @@ export class ClientService {
 
   chooseConsultation(consultationId: number) {
     this.http.put(CLIENT_API_URL + '/consultations/' + consultationId, {})
-      .subscribe(
-        () => location.reload()
-  );
+      .subscribe(() => location.reload());
   }
 
   getClientInfo(): Observable<User> {

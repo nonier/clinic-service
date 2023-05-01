@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable} from "rxjs";
-import {Message} from "../../model/Message";
+import {Message} from "../model/Message";
+import {Doctor} from "../model/Doctor";
+import {Specialization} from "../model/Specialization";
 
 
 @Injectable({
@@ -9,6 +11,8 @@ import {Message} from "../../model/Message";
 export class DataService {
 
   messages: BehaviorSubject<Map<number, Message>> = new BehaviorSubject(new Map());
+  doctors: BehaviorSubject<Doctor[]> = new BehaviorSubject([]);
+  specializations: BehaviorSubject<Specialization[]> = new BehaviorSubject([]);
 
   updateMessages(messages: Message[]) {
     let oldMessages = this.messages.value;
@@ -25,5 +29,21 @@ export class DataService {
         return messages;
       })
     )
+  }
+
+  updateDoctors(doctors: Doctor[]) {
+    this.doctors.next(doctors);
+  }
+
+  getDoctors(): Observable<Doctor[]> {
+    return this.doctors;
+  }
+
+  updateSpecializations(specializations: Specialization[]) {
+    this.specializations.next(specializations);
+  }
+
+  getSpecializations(): Observable<Specialization[]> {
+    return this.specializations;
   }
 }

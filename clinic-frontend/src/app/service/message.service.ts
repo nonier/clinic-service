@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {environment} from "../../../environments/environment";
-import {Message} from "../../model/Message";
-import {DataService} from "../data/data.service";
-import {UpdateMessage} from "../../model/UpdateMessage";
+import {environment} from "../../environments/environment";
+import {Message} from "../model/Message";
+import {DataService} from "./data.service";
+import {UpdateMessage} from "../model/UpdateMessage";
 
 const CLIENT_API_URL = environment.apiHost + '/clients';
 const MESSAGE_API_URL = environment.apiHost + '/messages';

@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
-import {TokenService} from "../service/token/token.servise";
+import {TokenService} from "../service/token.servise";
 import {TokenResponse} from "../model/TokenResponse";
 import {Router} from "@angular/router";
 

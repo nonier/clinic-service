@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {User} from "../../model/User";
+import {User} from "../model/User";
 import {HttpClient} from "@angular/common/http";
-import {TokenService} from "../token/token.servise";
+import {TokenService} from "./token.servise";
 import {Observable} from "rxjs";
-import {TokenResponse} from "../../model/TokenResponse";
-import {environment} from "../../../environments/environment";
+import {TokenResponse} from "../model/TokenResponse";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +16,9 @@ export class AuthService {
 
   getCurrentUser(): User {
     let accessToken = this.tokenService.getDecodedAccessToken();
-    if (accessToken) {
-      let user = {
-        id: accessToken['userId'],
-        name: accessToken['name'],
-        username: accessToken['sub'],
-        roles: accessToken['roles']
-      };
-      return user;
+    if (this.tokenService.getDecodedAccessToken()) {
+      return new User(accessToken['userId'], accessToken['sub'], null,
+        accessToken['name'], null, null, accessToken['roles']);
     }
     return null;
   }

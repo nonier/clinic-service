@@ -1,11 +1,11 @@
 import * as SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
-import {AuthService} from "../auth/auth.service";
-import {environment} from "../../../environments/environment";
-import {TokenService} from "../token/token.servise";
-import {Message} from "../../model/Message";
+import {AuthService} from "./auth.service";
+import {environment} from "../../environments/environment";
+import {TokenService} from "./token.servise";
+import {Message} from "../model/Message";
 import {Injectable} from "@angular/core";
-import {DataService} from "../data/data.service";
+import {DataService} from "./data.service";
 
 @Injectable({
   providedIn: 'root'

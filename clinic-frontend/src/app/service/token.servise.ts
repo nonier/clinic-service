@@ -1,8 +1,8 @@
 import {Injectable, OnInit} from "@angular/core";
 import jwtDecode from "jwt-decode";
-import {TokenResponse} from "../../model/TokenResponse";
+import {TokenResponse} from "../model/TokenResponse";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
+import {environment} from "../../environments/environment";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 
 const ACCESS_TOKEN = 'access-token';

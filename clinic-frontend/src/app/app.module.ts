@@ -6,14 +6,35 @@ import {AppComponent} from "./app.component";
 import {FreeConsultationPipe} from "./pipe/free-consultation.pipe";
 import {NgxBootstrapMultiselectModule} from "ngx-bootstrap-multiselect";
 import {AppRoutingModule} from "./app-routing.module";
-import {LoginPageComponent} from './login-page/login-page.component';
-import {SiteLayoutComponent} from './shared/layouts/site-layout/site-layout.component';
-import {RegistrationPageComponent} from './registration-page/registration-page.component';
-import {DoctorsPageComponent} from './doctors-page/doctors-page.component';
+import {LoginPageComponent} from './pages/login-page/login-page.component';
+import {SiteLayoutComponent} from './layouts/site-layout/site-layout.component';
+import {RegistrationPageComponent} from './pages/registration-page/registration-page.component';
+import {DoctorsPageComponent} from './pages/doctors-page/doctors-page.component';
 import {AuthInterceptor} from "./interseptor/AuthInterseptor";
-import {ProfilePageComponent} from "./profile-page/profile-page.component";
+import {ProfilePageComponent} from "./pages/profile-page/profile-page.component";
 import {RoleNamePipe} from './pipe/role-name.pipe';
-import { DialogPageComponent } from './dialog-page/dialog-page.component';
+import { DialogPageComponent } from './pages/dialog-page/dialog-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatMenuModule} from "@angular/material/menu";
+import {MatIconModule} from "@angular/material/icon";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import {NzSpaceModule} from "ng-zorro-antd/space";
+import {NzCardModule} from "ng-zorro-antd/card";
+import {NzGridModule} from "ng-zorro-antd/grid";
+import {NzAvatarModule} from "ng-zorro-antd/avatar";
+import {NzListModule} from "ng-zorro-antd/list";
+import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
+import {NzTypographyModule} from "ng-zorro-antd/typography";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatListModule} from "@angular/material/list";
+import {MatCardModule} from "@angular/material/card";
+
+registerLocaleData(en);
 
 
 @NgModule({
@@ -28,16 +49,28 @@ import { DialogPageComponent } from './dialog-page/dialog-page.component';
     RoleNamePipe,
     DialogPageComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    FormsModule,
-    NgxBootstrapMultiselectModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        FormsModule,
+        NgxBootstrapMultiselectModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        NzSpaceModule,
+        NzCardModule,
+        NzGridModule,
+        NzAvatarModule,
+        NzListModule,
+        NzDescriptionsModule,
+        NzTypographyModule,
+        MatGridListModule,
+        MatListModule,
+        MatCardModule,
+    ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]
 })
