@@ -1,0 +1,59 @@
+.user_profile_form {
+  margin: 20px 0 0 0;
+  text-align: center;
+}
+
+.user_profile_title {
+  font-size: x-large;
+  padding: 10px 0 0 0;
+  margin: 0 0 20px 0;
+}
+
+.username_input {
+  margin-right: 20px;
+  width: 45%;
+}
+
+.name_input {
+  width: 45%;
+}
+
+.surname_input {
+  margin-right: 20px;
+  width: 45%;
+}
+
+.date_birth_picker {
+  width: 45%;
+}
+
+.change_info_button {
+  margin: 0 0 20px 0;
+}
+
+.user_consultations {
+  margin: 20px 0 0 0;
+}
+
+.user_consultations_title {
+  font-size: x-large;
+  padding: 10px 0 0 0;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.doctor_avatar {
+  transform: scale(3);
+}
+
+.doctor_name {
+  font-size: large;
+}
+
+.enter_chat_button {
+  float: right;
+}
+
+.consultation {
+  margin-left: 5px;
+}

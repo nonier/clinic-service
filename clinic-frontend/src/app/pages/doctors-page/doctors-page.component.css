@@ -43,6 +43,14 @@
 
 .doctor_specializations_block {
   margin: 0 0 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.doctor_education_icon {
+  height: 28px;
+  width: 28px;
+  margin: 0 5px 0 0;
 }
 
 .doctor_specializations {

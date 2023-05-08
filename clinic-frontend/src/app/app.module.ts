@@ -35,6 +35,9 @@ import {MatInputModule} from "@angular/material/input";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatSelectModule} from "@angular/material/select";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 registerLocaleData(en);
 
@@ -51,31 +54,34 @@ registerLocaleData(en);
     RoleNamePipe,
     DialogPageComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        FormsModule,
-        NgxBootstrapMultiselectModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        NzSpaceModule,
-        NzCardModule,
-        NzGridModule,
-        NzAvatarModule,
-        NzListModule,
-        NzDescriptionsModule,
-        NzTypographyModule,
-        MatGridListModule,
-        MatListModule,
-        MatCardModule,
-        MatButtonModule,
-        MatIconModule,
-        MatInputModule,
-        MatChipsModule,
-        MatAutocompleteModule,
-        MatSelectModule,
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    NgxBootstrapMultiselectModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NzSpaceModule,
+    NzCardModule,
+    NzGridModule,
+    NzAvatarModule,
+    NzListModule,
+    NzDescriptionsModule,
+    NzTypographyModule,
+    MatGridListModule,
+    MatListModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     { provide: NZ_I18N, useValue: en_US }

@@ -27,4 +27,9 @@ export class ClientService {
   getClientInfo(): Observable<User> {
     return this.http.get<User>(CLIENT_API_URL);
   }
+
+  changeClientInfo(user: User) {
+    this.http.put(CLIENT_API_URL, user)
+      .subscribe();
+  }
 }

@@ -1,38 +1,14 @@
-<nav>
-  <div class="nav-wrapper light-blue">
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
     <a routerLink="/doctors"><img class="logo" src="../../../assets/img/logo.png" alt="Логотип"></a>
-    <ul class="right hide-on-med-and-down">
-      <li>
-        <a routerLink="/doctors">
-          Doctors
-        </a>
-      </li>
-      <li>
-        <a (click)="check()">About us</a>
-      </li>
-      <li *ngIf="!isLoggedIn">
-        <a routerLink="/login">
-          Sign in
-        </a>
-      </li>
-      <li *ngIf="!isLoggedIn">
-        <a routerLink="/registration">
-          Sign up
-        </a>
-      </li>
-      <li *ngIf="isLoggedIn">
-        <a routerLink="/profile">
-          Personal profile
-        </a>
-      </li>
-      <li *ngIf="isLoggedIn">
-        <a (click)="logout()">
-          Logout
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-
+    <div class="nav_menu">
+      <a mat-button [routerLink]="'/doctors'"> Doctors </a>
+      <a mat-button [routerLink]="'/'"> About us </a>
+      <a mat-button *ngIf="!isLoggedIn" [routerLink]="'/login'"> Sign in </a>
+      <a mat-button *ngIf="!isLoggedIn" [routerLink]="'/registration'"> Sign up </a>
+      <a mat-button *ngIf="isLoggedIn" [routerLink]="'/profile'"> Personal profile </a>
+      <a mat-button *ngIf="isLoggedIn" (click)="logout()"> Logout </a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
 <router-outlet></router-outlet>

@@ -16,6 +16,7 @@ public interface UserMapper {
     @Mapping(target = "username", source = "username")
     @Mapping(target = "name", source = "name")
     @Mapping(target = "surname", source = "surname")
+    @Mapping(target = "birthDate", source = "birthDate")
     @Mapping(target = "roles", source = "userRoles")
     UserDto user2UserDto(User user);
 

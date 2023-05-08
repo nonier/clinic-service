@@ -10,5 +10,6 @@ public class ConsultationDto {
     private Long id;
     private LocalDateTime date;
     private UserDto client;
+    private UserDto doctor;
     private Long dialogId;
 }

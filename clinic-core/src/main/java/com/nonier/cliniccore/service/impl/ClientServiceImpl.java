@@ -3,10 +3,12 @@ package com.nonier.cliniccore.service.impl;
 import com.nonier.cliniccore.dto.ConsultationDto;
 import com.nonier.cliniccore.dto.MessageDto;
 import com.nonier.cliniccore.dto.UserDto;
+import com.nonier.cliniccore.dto.UserUpdateDto;
 import com.nonier.cliniccore.entity.Consultation;
 import com.nonier.cliniccore.entity.User;
 import com.nonier.cliniccore.mapper.UserMapper;
 import com.nonier.cliniccore.repository.ConsultationRepository;
+import com.nonier.cliniccore.repository.UserRepository;
 import com.nonier.cliniccore.service.AuthService;
 import com.nonier.cliniccore.service.ClientService;
 import com.nonier.cliniccore.service.ConsultationService;
@@ -28,6 +30,7 @@ public class ClientServiceImpl implements ClientService {
     private final UserMapper userMapper;
     private final ConsultationService consultationService;
     private final MessageService messageService;
+    private final UserRepository userRepository;
 
 
     @Override
@@ -52,5 +55,14 @@ public class ClientServiceImpl implements ClientService {
     public List<MessageDto> findClientMessages(Principal principal) {
         User client = authService.getUser(principal);
         return messageService.findAllByUser(client);
+    }
+
+    @Override
+    public void updateUserInfo(Principal principal, UserUpdateDto userUpdateDto) {
+        User user = authService.getUser(principal);
+        user.setName(userUpdateDto.getName());
+        user.setSurname(userUpdateDto.getSurname());
+        user.setBirthDate(userUpdateDto.getBirthDate());
+        userRepository.save(user);
     }
 }

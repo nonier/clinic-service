@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -13,6 +14,7 @@ public class UserUpdateDto {
     private String username;
     private String name;
     private String surname;
+    private LocalDate birthDate;
     @NotBlank
     private String password;
     @NotEmpty

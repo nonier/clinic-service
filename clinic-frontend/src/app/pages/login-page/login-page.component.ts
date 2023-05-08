@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
 import {TokenService} from "../../service/token.servise";
@@ -11,8 +10,9 @@ import {TokenService} from "../../service/token.servise";
 })
 export class LoginPageComponent implements OnInit {
 
-  form: FormGroup;
   isLoggedIn = false;
+  username = '';
+  password = '';
 
   constructor(private auth: AuthService, private tokenService: TokenService, private router: Router) {
     tokenService.isLoggedIn.subscribe((isLoggedId) => this.isLoggedIn = isLoggedId);
@@ -20,16 +20,12 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      username: new FormControl(null, [Validators.required, Validators.minLength(6)]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(6)])
-    })
   }
 
   onSubmit() {
     let user = {
-      username: this.form.value.username,
-      password: this.form.value.password
+      username: this.username,
+      password: this.password
     };
     this.auth.login(user).subscribe(
       token => {

@@ -1,37 +1,68 @@
-<div class="user_info">
-  <div class="row">
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title">My info</span>
-        <p *ngIf="user != undefined">
-          Name: {{user.name}}
-        </p>
-        <p *ngIf="user != undefined">
-          Surname: {{user.surname}}
-        </p>
-        <p *ngIf="user != undefined">
-          BirthDate: {{user.birthDate}}
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<div class="row">-->
+<!--  <div class="consultations">-->
+<!--    <div class="consultations_title">-->
+<!--      My consultations-->
+<!--    </div>-->
+<!--    <div class="collection">-->
+<!--      <div class="collection-item" *ngFor="let consultation of consultations">-->
+<!--        <div>-->
+<!--          Time: {{consultation.date | date:'medium'}}-->
+<!--        </div>-->
+<!--        <a class="waves-effect waves-light btn" *ngIf="isAppointedTimeCome(consultation.date)"-->
+<!--           [routerLink]="['/dialog',consultation.dialogId]">-->
+<!--          Enter to chat-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
-<div class="row">
-  <div class="consultations">
-    <div class="consultations_title">
-      My consultations
-    </div>
-    <div class="collection">
-      <div class="collection-item" *ngFor="let consultation of consultations">
-        <div>
-          Time: {{consultation.date | date:'medium'}}
-        </div>
-        <a class="waves-effect waves-light btn" *ngIf="isAppointedTimeCome(consultation.date)"
-           [routerLink]="['/dialog',consultation.dialogId]">
-          Enter to chat
-        </a>
+<mat-card class="user_profile_form">
+  <mat-card-title class="user_profile_title">My profile</mat-card-title>
+  <form (ngSubmit)="changeInfo()">
+    <mat-form-field class="username_input">
+      <mat-label>Username</mat-label>
+      <input matInput value="{{user?.username}}" disabled>
+    </mat-form-field>
+    <mat-form-field class="name_input">
+      <mat-label>Name</mat-label>
+      <input matInput value="{{user?.name}}" name="name" [(ngModel)]="name">
+      <mat-error>
+        Please provide a valid name
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="surname_input">
+      <mat-label>Surname</mat-label>
+      <input matInput value="{{user?.surname}}" name="surname" [(ngModel)]="surname">
+      <mat-error>
+        Please provide a valid surname
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="date_birth_picker" appearance="fill">
+      <mat-label>Date birth</mat-label>
+      <input matInput [max]="maxDate" [matDatepicker]="picker" value="{{user?.birthDate}}" [(ngModel)]="birthDate"
+             name="birthDate">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button class="change_info_button" mat-raised-button color="primary"
+            (click)="changeInfo()">Change info
+    </button>
+  </form>
+</mat-card>
+
+<mat-card class="user_consultations">
+  <mat-card-title class="user_consultations_title">My consultations</mat-card-title>
+  <mat-list class="consultations">
+    <mat-list-item class="consultation" *ngFor="let consultation of consultations">
+      <img matListItemIcon class="doctor_avatar" src="../../../assets/img/doctor_blue.svg" alt="Аватар">
+      <div class="doctor_name" matListItemTitle>{{consultation.doctor.name}} {{consultation.doctor.surname}}
+        <button class="enter_chat_button" mat-raised-button color="primary"
+                *ngIf="isAppointedTimeCome(consultation.date)" [routerLink]="['/dialog',consultation.dialogId]">
+          Enter chat
+        </button></div>
+      <div matListItemLine>{{consultation.date | date:'medium'}}
       </div>
-    </div>
-  </div>
-</div>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

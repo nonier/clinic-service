@@ -3,6 +3,7 @@ package com.nonier.cliniccore.controller;
 import com.nonier.cliniccore.dto.ConsultationDto;
 import com.nonier.cliniccore.dto.MessageDto;
 import com.nonier.cliniccore.dto.UserDto;
+import com.nonier.cliniccore.dto.UserUpdateDto;
 import com.nonier.cliniccore.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,12 @@ public class ClientController {
     @GetMapping("/messages")
     public ResponseEntity<List<MessageDto>> findClientMessages(Principal principal) {
         return ResponseEntity.ok(clientService.findClientMessages(principal));
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> updateUserInfo(Principal principal, @RequestBody UserUpdateDto userUpdateDto) {
+        clientService.updateUserInfo(principal, userUpdateDto);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/consultations/{consultationId}")
