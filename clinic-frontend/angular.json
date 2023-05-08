@@ -30,7 +30,6 @@
               }
             ],
             "styles": [
-              "src/theme.less",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
@@ -111,5 +110,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "6ca7dd05-1101-4620-92bc-b6d25bce299e"
   }
 }

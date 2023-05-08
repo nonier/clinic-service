@@ -9,3 +9,4 @@ pluginManagement {
 rootProject.name = 'clinic-service'
 include 'clinic-core'
 include 'clinic-admin'
+include 'clinic-frontend'

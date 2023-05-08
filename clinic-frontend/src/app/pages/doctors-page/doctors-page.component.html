@@ -1,82 +1,92 @@
 <div class="doctors_search_menu">
-  <!--  <div class="doctors_search_menu_desc">-->
-  <!--    Choose doctor-->
-  <!--  </div>-->
+  <div class="doctors_search_menu_desc">
+    Choose doctor
+  </div>
+  <div class="input-group">
+    <div>
+      <mat-form-field class="doctor_name_input">
+        <mat-label>Doctor name</mat-label>
+        <input #doctor_name_input matInput (keyup)="findByFilter(doctor_name_input.value)">
+        <button *ngIf="doctor_name_input.value" matSuffix mat-icon-button aria-label="Clear"
+                (click)="doctor_name_input.value = '';findByFilter(doctor_name_input.value)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
 
-  <!--  <div class="input-group">-->
-  <!--    <input #doctor_search_name type="text" class="form-control" placeholder="Name/surname"-->
-  <!--           (keyup)="findByFilter(doctor_search_name.value)">-->
-  <!--    <ngx-bootstrap-multiselect [options]="specializationOptions" [(ngModel)]="specializationIdsFilter"-->
-  <!--                               [texts]="specializationsTexts"-->
-  <!--                               (ngModelChange)="onChangeSpecializations()"></ngx-bootstrap-multiselect>-->
-  <!--  </div>-->
-  <div class="doctors">
-    <mat-card class="doctor" *ngFor="let doctor of doctors">
-      <mat-card-content class="doctor_card">
-        <div class="doctor_avatar_block">
-          <img mat-card-md-image class="doctor_avatar" src="../../../assets/img/doctor_blue.svg" alt="Аватар">
-          <p>{{doctor.rank}}</p>
+      <mat-form-field class="doctor_specializations_checkbox"  appearance="fill">
+        <mat-label>Doctor specializations</mat-label>
+        <mat-select [formControl]="specializationsCtrl" multiple>
+          <mat-select-trigger>
+            {{(specializationsCtrl.value?.[0])?.name || ''}}
+            <span *ngIf="(specializationsCtrl.value?.length || 0) > 1" class="example-additional-selection">
+                (+{{(specializationsCtrl.value?.length || 0) - 1}} {{specializationsCtrl.value?.length === 2 ?
+              'other' : 'others'}})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let specialization of allSpecializations" [value]="specialization"
+          (click)="findByFilter(doctor_name_input.value)">
+            {{specialization.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </div>
+</div>
+<div class="doctors">
+  <mat-card class="doctor" *ngFor="let doctor of doctors">
+    <mat-card-content class="doctor_card">
+      <div class="doctor_avatar_block">
+        <img mat-card-md-image class="doctor_avatar" src="../../../assets/img/doctor_blue.svg" alt="Аватар">
+        <p>{{doctor.rank}}</p>
+      </div>
+      <div class="doctor_info_block">
+        <p class="doctor_name">
+          <b>{{doctor.user.name}} {{doctor.user.surname}}</b>
+        </p>
+        <div class="doctor_specializations_block">
+          <ul class="doctor_specializations">
+            <li *ngFor="let specialization of doctor.specializations">
+              {{specialization.name}}
+            </li>
+          </ul>
         </div>
-        <div class="doctor_info_block">
-          <p class="doctor_name">
-            <b>{{doctor.user.name}} {{doctor.user.surname}}</b>
-          </p>
-          <div class="doctor_specializations_block">
-            <ul class="doctor_specializations">
-              <li *ngFor="let specialization of doctor.specializations">
-                {{specialization.name}}
-              </li>
-            </ul>
+        <div class="doctor_experience_block">
+          <img class="doctor_experience_icon" src="../../../assets/img/experience.svg">
+          <div class="doctor_experience" *ngIf="doctor.workExperience % 10 == 1">
+            Work experience: {{doctor.workExperience}} year
+          </div>
+          <div class="doctor_experience" *ngIf="doctor.workExperience % 10 > 1">
+            Work experience: {{doctor.workExperience}} years
           </div>
         </div>
-      </mat-card-content>
-    </mat-card>
-    <!--  <div class="row" *ngFor="let doctor of doctors">-->
-    <!--    <div class="doctor card">-->
-    <!--      <div class="doctor_avatar_block">-->
-    <!--        <img class="doctor_avatar" src="../../../assets/img/doctor_blue.svg" alt="Аватар">-->
-    <!--        <div class="doctor_rank">-->
-    <!--          {{doctor.rank}}-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div class="doctor_description">-->
-    <!--        <div class="doctor_name">-->
-    <!--          {{doctor.user.name}} {{doctor.user.surname}}-->
-    <!--        </div>-->
-    <!--        <div class="doctor_specializations_block">-->
-    <!--          <ul class="doctor_specializations">-->
-    <!--            <li class="doctor_specialization" *ngFor="let spec of doctor.specializations">-->
-    <!--              {{spec.name}}-->
-    <!--            </li>-->
-    <!--          </ul>-->
-    <!--        </div>-->
-    <!--        <div class="doctor_experience" *ngIf="doctor.workExperience % 10 < 5 && doctor.workExperience % 10 > 0">-->
-    <!--          Work experience: {{doctor.workExperience}} years-->
-    <!--        </div>-->
-    <!--        <div class="doctor_experience" *ngIf="doctor.workExperience == 1">-->
-    <!--          Work experience: {{doctor.workExperience}} year-->
-    <!--        </div>-->
-    <!--        <div class="doctor_age_group">-->
-    <!--          Age group: {{doctor.ageGroup}}-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div class="doctor_busy" *ngIf="doctor.consultations === null ||-->
-    <!--                                    (doctor.consultations | freeConsultation).length === 0">-->
-    <!--        Doctor does not have free consultations-->
-    <!--      </div>-->
-    <!--      <div class="doctor_schedule"-->
-    <!--           *ngIf="doctor.consultations != null && (doctor.consultations | freeConsultation).length > 0">-->
-    <!--        <div>-->
-    <!--          Free consultations-->
-    <!--        </div>-->
-    <!--        <ul class="consultations">-->
-    <!--          <li class="consultation" *ngFor="let consultation of doctor.consultations | freeConsultation">-->
-    <!--            <a class="waves-effect waves-light btn"-->
-    <!--            (click)="chooseConsultation(consultation.id)">-->
-    <!--              {{consultation.date | date:'medium'}}</a>-->
-    <!--          </li>-->
-    <!--        </ul>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--  </div>-->
-  </div>
+        <div class="doctor_age_group_block">
+          <img class="patient_icon" src="../../../assets/img/patient.svg">
+          <div class="doctor_age_group">
+            Age group: {{doctor.ageGroup}}
+          </div>
+        </div>
+      </div>
+      <div class="doctor_schedule_block">
+        <div class="doctor_busy" *ngIf="doctor.consultations === null ||
+                                          (doctor.consultations | freeConsultation).length === 0">
+          Doctor does not have free consultations
+        </div>
+        <div class="doctor_schedule"
+             *ngIf="doctor.consultations != null && (doctor.consultations | freeConsultation).length > 0">
+          <div class="free_consultations">
+            Free consultations
+          </div>
+          <ul class="consultations">
+            <li class="consultation" *ngFor="let consultation of doctor.consultations | freeConsultation">
+              <button class="consultation_button" mat-fab extended color="primary"
+                      (click)="chooseConsultation(consultation.id)">
+                {{consultation.date | date:'medium'}}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

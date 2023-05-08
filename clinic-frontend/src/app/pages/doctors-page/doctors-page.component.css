@@ -1,3 +1,22 @@
+.doctors_search_menu {
+  margin: 0 0 20px 0;
+}
+
+.doctors_search_menu_desc {
+  font-size: x-large;
+  padding: 20px 0 0 0;
+  margin: 0 0 10px 0;
+}
+
+.doctor_name_input {
+  width: 75%;
+}
+
+.doctor_specializations_checkbox {
+  width: 25%;
+  height: 86px;
+}
+
 .doctor {
   margin-bottom: 40px;
 }
@@ -10,21 +29,74 @@
 .doctor_avatar_block {
   text-align: center;
   margin-right: 20px;
+  font-size: medium;
 }
 
 .doctor_info_block {
-  width: 150px;
+  width: 250px;
 }
 
 .doctor_name {
-  font-size: large;
+  font-size: x-large;
+  margin: 0 0 5px 0;
 }
 
 .doctor_specializations_block {
-  word-wrap:break-word;
-  width: 300px;
+  margin: 0 0 5px 0;
 }
 
 .doctor_specializations {
+  margin: 0;
+}
+
+.doctor_specializations li {
+  display: inline;
+  font-size: medium;
+}
+
+.doctor_experience_block {
+  margin: 0 0 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.doctor_experience_icon {
+  height: 28px;
+  width: 28px;
+  margin: 0 5px 0 0;
+}
+
+.doctor_experience {
+  font-size: medium;
   display: inline;
 }
+
+.doctor_age_group_block {
+  display: flex;
+  align-items: center;
+}
+
+.patient_icon {
+  height: 28px;
+  width: 28px;
+  margin: 0 5px 0 0;
+}
+
+.doctor_age_group {
+  font-size: medium;
+  display: inline;
+}
+
+.doctor_busy {
+  font-size: x-large;
+}
+
+.free_consultations {
+  font-size: large;
+}
+
+.consultation {
+  display: inline;
+  margin: 0 0 0 5px;
+}
+

@@ -15,10 +15,7 @@ import {ProfilePageComponent} from "./pages/profile-page/profile-page.component"
 import {RoleNamePipe} from './pipe/role-name.pipe';
 import { DialogPageComponent } from './pages/dialog-page/dialog-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatFormFieldModule} from "@angular/material/form-field";
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
@@ -33,6 +30,11 @@ import {NzTypographyModule} from "ng-zorro-antd/typography";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatSelectModule} from "@angular/material/select";
 
 registerLocaleData(en);
 
@@ -67,6 +69,12 @@ registerLocaleData(en);
         MatGridListModule,
         MatListModule,
         MatCardModule,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        MatChipsModule,
+        MatAutocompleteModule,
+        MatSelectModule,
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

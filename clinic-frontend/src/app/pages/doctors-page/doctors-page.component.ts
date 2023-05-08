@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Doctor} from "../../model/Doctor";
 import {DoctorService} from "../../service/doctor.service";
-import {IMultiSelectOption, IMultiSelectTexts} from "ngx-bootstrap-multiselect";
 import {SpecializationService} from "../../service/specialization.service";
 import {ClientService} from "../../service/client.service";
+import {Specialization} from "../../model/Specialization";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-doctors-page',
@@ -14,11 +15,8 @@ export class DoctorsPageComponent implements OnInit {
 
   doctors: Doctor[] = [];
   nameFilter: string = "";
-  specializationIdsFilter: number[] = [];
-  specializationOptions: IMultiSelectOption[] = [];
-  specializationsTexts: IMultiSelectTexts = {
-    defaultTitle: "Specializations"
-  }
+  allSpecializations: Specialization[] = [];
+  specializationsCtrl = new FormControl<Specialization[]>([]);
 
   constructor(private doctorService: DoctorService, private specializationService: SpecializationService,
               private clientService: ClientService) {
@@ -38,19 +36,18 @@ export class DoctorsPageComponent implements OnInit {
   getSpecializations() {
     this.specializationService.fetchAllSpecializations();
     this.specializationService.getSpecializations()
-      .subscribe(specializations => this.specializationOptions = specializations);
+      .subscribe(specializations => this.allSpecializations = specializations);
   }
 
   findByFilter(name: string) {
     this.nameFilter = name;
-    this.doctorService.getDoctorsWithFilters(this.nameFilter, this.specializationIdsFilter);
-  }
-
-  onChangeSpecializations() {
-    this.doctorService.getDoctorsWithFilters(this.nameFilter, this.specializationIdsFilter);
+    this.doctorService.getDoctorsWithFilters(this.nameFilter, this.specializationsCtrl.value
+      .map(specialization => specialization.id));
   }
 
   chooseConsultation(consultationId: number) {
     this.clientService.chooseConsultation(consultationId);
   }
+
+  protected readonly Specialization = Specialization;
 }
