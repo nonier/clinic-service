@@ -55,8 +55,15 @@
   <mat-card-title class="user_consultations_title">My consultations</mat-card-title>
   <mat-list class="consultations">
     <mat-list-item class="consultation" *ngFor="let consultation of consultations">
-      <img matListItemIcon class="doctor_avatar" src="../../../assets/img/doctor_blue.svg" alt="Аватар">
-      <div class="doctor_name" matListItemTitle>{{consultation.doctor.name}} {{consultation.doctor.surname}}
+      <img *ngIf="(consultation.client.roles | roleName).includes('ADMIN')"
+           matListItemIcon class="avatar" src="../../../assets/img/doctor_blue.svg" alt="Аватар">
+      <img *ngIf="!(consultation.client.roles | roleName).includes('ADMIN')"
+           matListItemIcon class="avatar" src="../../../assets/img/patient.svg" alt="Аватар">
+      <div class="dialog_user_name" matListItemTitle>
+        <span *ngIf="(user.roles | roleName).includes('ADMIN')">
+          {{consultation.client.name}} {{consultation.client.surname}}</span>
+        <span *ngIf="!(user.roles | roleName).includes('ADMIN')">
+          {{consultation.doctor.name}} {{consultation.doctor.surname}}</span>
         <button class="enter_chat_button" mat-raised-button color="primary"
                 *ngIf="isAppointedTimeCome(consultation.date)" [routerLink]="['/dialog',consultation.dialogId]">
           Enter chat

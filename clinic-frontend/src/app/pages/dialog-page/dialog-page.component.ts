@@ -15,6 +15,7 @@ export class DialogPageComponent implements OnInit {
 
   dialogId: number;
   messages: Message[];
+  text: string =  '';
 
   constructor(private notificationService: NotificationService, private route: ActivatedRoute,
               private messageService: MessageService, private authService: AuthService) {
@@ -33,9 +34,10 @@ export class DialogPageComponent implements OnInit {
       .subscribe((messages) => this.messages = messages);
   }
 
-  sendMessage(text: string) {
+  sendMessage() {
     let user = this.authService.getCurrentUser();
-    let message = new UpdateMessage(text, user.id, this.dialogId);
+    let message = new UpdateMessage(this.text, user.id, this.dialogId);
     this.messageService.sendMessage(message);
+    this.text = '';
   }
 }

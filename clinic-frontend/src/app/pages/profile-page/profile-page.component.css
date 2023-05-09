@@ -42,11 +42,11 @@
   text-align: center;
 }
 
-.doctor_avatar {
+.avatar {
   transform: scale(3);
 }
 
-.doctor_name {
+.dialog_user_name {
   font-size: large;
 }
 

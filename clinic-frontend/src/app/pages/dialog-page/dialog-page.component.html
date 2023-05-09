@@ -1,16 +1,22 @@
-<div class="row">
-  <div class="collection">
-    <div class="collection-item" *ngFor="let message of messages">
-      <div class="message">
-        {{message.text}}
-        {{message.creationDate}}
-        {{message.userFrom}}
-      </div>
-    </div>
-  </div>
-</div>
-<div class="input-field col s12">
-  <input #textInput type="text" placeholder="send message">
-</div>
-
-<button (click)="sendMessage(textInput.value)">Send Message</button>
+<mat-list class="messages">
+  <div class="messages_desc" mat-subheader>Messages</div>
+  <mat-list-item class="message mat-list-item-word-wrap" *ngFor="let message of messages">
+    <img *ngIf="(message.userFrom.roles | roleName).includes('ADMIN')"
+         matListItemIcon class="avatar" src="../../../assets/img/doctor_blue.svg" alt="Аватар">
+    <img *ngIf="!(message.userFrom.roles | roleName).includes('ADMIN')"
+         matListItemIcon class="avatar" src="../../../assets/img/patient.svg" alt="Аватар">
+    <div matListItemTitle>{{message.userFrom.name}} {{message.userFrom.surname}} {{message.creationDate | date:'medium'}}</div>
+    <div class="message_text" matListItemLine>
+      <p>{{message.text}}</p></div>
+  </mat-list-item>
+</mat-list>
+<form class="send_message_form">
+  <mat-form-field class="message_text_input_block">
+    <mat-label>MessageText</mat-label>
+    <input class="message_text_input"  matInput [(ngModel)]="text" name="text">
+    <button class="send_message_button" mat-raised-button color="primary"
+            (click)="sendMessage()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </mat-form-field>
+</form>

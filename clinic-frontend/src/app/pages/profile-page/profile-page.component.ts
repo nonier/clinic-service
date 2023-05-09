@@ -24,7 +24,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.authService.getCurrentUser().roles.map(role => role.name).includes("DOCTOR")) {
+    if (this.authService.getCurrentUser().roles.map(role => role.name).includes("ADMIN")) {
       this.doctorService.getDoctorConsultations()
         .subscribe(consultations => this.consultations = consultations);
     } else {

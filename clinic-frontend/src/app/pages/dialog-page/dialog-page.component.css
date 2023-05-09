@@ -1,0 +1,32 @@
+.messages_desc {
+  font-size: x-large;
+}
+
+.message {
+  height: initial !important;
+  margin-bottom: 10px;
+  width: 70%;
+}
+
+.message_text {
+  word-wrap: break-word !important;
+  white-space: pre-wrap !important;
+}
+
+.message_text_input_block {
+  width: 100%;
+}
+
+.message_text_input {
+  display: inline;
+  width: 90%;
+}
+
+.send_message_button {
+  float: right;
+  width: 5%;
+}
+
+.avatar {
+  transform: scale(3);
+}
