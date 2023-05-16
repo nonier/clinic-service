@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Consultation} from "../../model/Consultation";
-import {ClientService} from "../../service/client.service";
 import {User} from "../../model/User";
-import {AuthService} from "../../service/auth.service";
-import {DoctorService} from "../../service/doctor.service";
+import {Time} from "@angular/common";
+import {ConsultationService} from "../../service/consultation.service";
+import {ProfileService} from "../../service/profile.service";
+
+const HOUR = 60*60*1000;
 
 @Component({
   selector: 'app-profile-page',
@@ -14,24 +16,32 @@ export class ProfilePageComponent implements OnInit {
 
   consultations: Consultation[];
   user: User;
+  newConsultationDate: Date;
+  newConsultationTime: Time;
   maxDate: Date = new Date();
   birthDate: Date;
   surname: string;
   name: string;
 
-  constructor(private clientService: ClientService, private authService: AuthService,
-              private doctorService: DoctorService) {
+  consultationDateTimeFilter = (date: Date | null): boolean => {
+    return this.consultations.map(consultation => consultation.date)
+      .map(consultationDate=> new Date(consultationDate))
+      .filter(consultationDate => {
+        console.log(consultationDate)
+        return consultationDate.getTime() - HOUR <= date.getTime()
+        && consultationDate.getTime() + HOUR >= date.getTime();
+      }).length === 0;
+  }
+
+  constructor(private consultationService:ConsultationService,
+              private profileService: ProfileService) {
+    this.consultationService.fetchAllUserConsultations();
+    this.consultationService.getUserConsultations()
+      .subscribe(consultations => this.consultations = consultations);
   }
 
   ngOnInit(): void {
-    if (this.authService.getCurrentUser().roles.map(role => role.name).includes("ADMIN")) {
-      this.doctorService.getDoctorConsultations()
-        .subscribe(consultations => this.consultations = consultations);
-    } else {
-      this.clientService.getClientConsultations()
-        .subscribe(consultations => this.consultations = consultations);
-    }
-    this.clientService.getClientInfo()
+    this.profileService.getUserInfo()
       .subscribe(user => {
           this.user = user;
           this.name = user.name;
@@ -51,7 +61,7 @@ export class ProfilePageComponent implements OnInit {
       surname: this.surname,
       birthDate: this.birthDate
     }
-    this.clientService.changeClientInfo(user);
+    this.profileService.updateClientInfo(user);
     window.location.reload();
   }
 }

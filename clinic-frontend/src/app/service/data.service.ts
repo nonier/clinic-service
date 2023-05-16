@@ -3,6 +3,7 @@ import {BehaviorSubject, map, Observable} from "rxjs";
 import {Message} from "../model/Message";
 import {Doctor} from "../model/Doctor";
 import {Specialization} from "../model/Specialization";
+import {Consultation} from "../model/Consultation";
 
 
 @Injectable({
@@ -13,6 +14,7 @@ export class DataService {
   messages: BehaviorSubject<Map<number, Message>> = new BehaviorSubject(new Map());
   doctors: BehaviorSubject<Doctor[]> = new BehaviorSubject([]);
   specializations: BehaviorSubject<Specialization[]> = new BehaviorSubject([]);
+  userConsultations: BehaviorSubject<Map<number, Consultation>> = new BehaviorSubject(new Map());
 
   updateMessages(messages: Message[]) {
     let oldMessages = this.messages.value;
@@ -45,5 +47,20 @@ export class DataService {
 
   getSpecializations(): Observable<Specialization[]> {
     return this.specializations;
+  }
+
+  updateConsultations(consultations: Consultation[]) {
+    let oldUserConsultations = this.userConsultations.value;
+    consultations.map(consultation => oldUserConsultations.set(consultation.id, consultation));
+    this.userConsultations.next(oldUserConsultations);
+  }
+
+  getConsultations(): Observable<Consultation[]> {
+    return this.userConsultations
+      .pipe(
+        map((consultations)=> {
+          return Array.from(consultations.values());
+        })
+      );
   }
 }

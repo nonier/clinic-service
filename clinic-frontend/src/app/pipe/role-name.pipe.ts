@@ -7,6 +7,6 @@ import {Role} from "../model/Role";
 export class RoleNamePipe implements PipeTransform {
 
   transform(roles: Role[], ...args: unknown[]): unknown {
-    return roles.map(role => role.name);
+    return roles?.map(role => role.name);
   }
 }

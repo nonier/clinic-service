@@ -6,7 +6,6 @@ import {Message} from "../model/Message";
 import {DataService} from "./data.service";
 import {UpdateMessage} from "../model/UpdateMessage";
 
-const CLIENT_API_URL = environment.apiHost + '/clients';
 const MESSAGE_API_URL = environment.apiHost + '/messages';
 
 @Injectable({
@@ -18,7 +17,7 @@ export class MessageService {
   }
 
   fetchAllMessages() {
-    this.http.get(CLIENT_API_URL + "/messages")
+    this.http.get(MESSAGE_API_URL)
       .subscribe((messages: Message[]) => this.dataService.updateMessages(messages));
   }
 

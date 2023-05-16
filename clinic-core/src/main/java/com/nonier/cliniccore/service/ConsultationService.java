@@ -9,15 +9,12 @@ import java.util.List;
 
 public interface ConsultationService {
 
-    List<ConsultationDto> findAll();
+    List<ConsultationDto> findAll(Principal principal);
 
     List<ConsultationDto> findAllByDoctorId(Long userId);
 
     ConsultationDto create(ConsultationUpdateDto dto);
 
-    void chooseConsultationByClient(Long consultationId, User client);
+    void chooseConsultation(Long consultationId, Principal principal);
 
-    List<ConsultationDto> findAllForClient(User user);
-
-    List<ConsultationDto> findByDoctor(Principal principal);
 }

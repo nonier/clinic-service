@@ -31,7 +31,8 @@ public class UserMapperUtil {
     public User userByUserId(Long id) {
         return Optional.ofNullable(id)
                 .map(userRepository::getReferenceById)
-                .orElseThrow(() -> new EntityNotFoundException("User with id: %d not found!".formatted(id)));
+                .orElse(null);
+//                .orElseThrow(() -> new EntityNotFoundException("User with id: %d not found!".formatted(id)));
     }
 
     @Qualifier

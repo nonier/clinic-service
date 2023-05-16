@@ -7,8 +7,7 @@ import {Consultation} from "../model/Consultation";
 export class FreeConsultationPipe implements PipeTransform {
 
   transform(consultations: Consultation[], ...args: unknown[]): Consultation[] {
-    return consultations
-      .filter((cons) => cons.client === null);
+    return consultations?.filter((cons) => cons.client === null);
   }
 
 }

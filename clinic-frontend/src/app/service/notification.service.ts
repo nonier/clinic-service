@@ -1,5 +1,5 @@
 import * as SockJS from 'sockjs-client';
-import { Stomp } from '@stomp/stompjs';
+import {Stomp} from "@stomp/stompjs";
 import {AuthService} from "./auth.service";
 import {environment} from "../../environments/environment";
 import {TokenService} from "./token.servise";

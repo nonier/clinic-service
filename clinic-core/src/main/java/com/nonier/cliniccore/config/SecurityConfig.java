@@ -50,15 +50,16 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/doctors/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/specializations/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/consultations/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/dialogs/**").hasAnyAuthority("ADMIN", "USER")
-                                .requestMatchers("/messages/**").hasAnyAuthority("ADMIN", "USER")
+                                .requestMatchers(HttpMethod.PATCH, "/consultations/{consultationId:\\d+}/choose").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/dialogs/**").hasAnyAuthority("ADMIN", "CLIENT", "DOCTOR")
+                                .requestMatchers("/messages/**").hasAnyAuthority("ADMIN", "CLIENT", "DOCTOR")
                                 .requestMatchers("/dialogs/**").permitAll()
-                                .requestMatchers("/clients/**").authenticated()
+                                .requestMatchers("/profile/**").authenticated()
                                 .requestMatchers("/users/**").hasAuthority("ADMIN")
                                 .requestMatchers("/role/**").hasAuthority("ADMIN")
-                                .requestMatchers("/messages/**").hasAnyAuthority("ADMIN", "DOCTOR")
-                                .requestMatchers("/dialogs/**").hasAnyAuthority("ADMIN", "DOCTOR")
-                                .requestMatchers("/reviews/**").hasAnyAuthority("ADMIN", "DOCTOR")
+                                .requestMatchers("/messages/**").hasAnyAuthority("ADMIN", "CLIENT", "DOCTOR")
+                                .requestMatchers("/dialogs/**").hasAnyAuthority("ADMIN", "CLIENT", "DOCTOR")
+                                .requestMatchers("/reviews/**").hasAnyAuthority("ADMIN", "CLIENT", "DOCTOR")
                                 .requestMatchers("/actuator/**").authenticated()
                                 .anyRequest().denyAll())
                 .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class)
@@ -80,7 +81,7 @@ public class SecurityConfig {
         configuration.setAllowCredentials(true);
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
         configuration.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

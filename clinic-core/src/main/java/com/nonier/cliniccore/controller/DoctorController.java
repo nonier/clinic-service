@@ -1,6 +1,5 @@
 package com.nonier.cliniccore.controller;
 
-import com.nonier.cliniccore.dto.ConsultationDto;
 import com.nonier.cliniccore.dto.DoctorDto;
 import com.nonier.cliniccore.dto.DoctorUpdateDto;
 import com.nonier.cliniccore.service.ConsultationService;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,11 +36,6 @@ public class DoctorController {
     @GetMapping("/{id}")
     public ResponseEntity<DoctorDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(doctorService.findById(id));
-    }
-
-    @GetMapping("/consultations")
-    public ResponseEntity<List<ConsultationDto>> findByDoctor(Principal principal) {
-        return ResponseEntity.ok(consultationService.findByDoctor(principal));
     }
 
     @PostMapping

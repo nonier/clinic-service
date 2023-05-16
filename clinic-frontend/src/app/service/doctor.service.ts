@@ -32,8 +32,4 @@ export class DoctorService {
     this.http.get<Doctor[]>(DOCTOR_API_URL + '/filter', {params})
       .subscribe(doctors=> this.dataService.updateDoctors(doctors));
   }
-
-  getDoctorConsultations(): Observable<Consultation[]> {
-    return this.http.get<Consultation[]>(DOCTOR_API_URL + '/consultations');
-  }
 }

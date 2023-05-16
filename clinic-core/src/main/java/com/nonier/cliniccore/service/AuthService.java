@@ -6,6 +6,7 @@ import com.nonier.cliniccore.jwt.JwtRequest;
 import com.nonier.cliniccore.jwt.JwtResponse;
 
 import java.security.Principal;
+import java.util.List;
 
 public interface AuthService {
 
@@ -18,4 +19,6 @@ public interface AuthService {
     void register(RegistrationDto registrationDto);
 
     User getUser(Principal principal);
+
+    List<String> getUserRoleNames(User user);
 }

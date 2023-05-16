@@ -2,10 +2,12 @@ package com.nonier.cliniccore.service.impl;
 
 import com.nonier.cliniccore.dto.MessageDto;
 import com.nonier.cliniccore.dto.MessageUpdateDto;
+import com.nonier.cliniccore.entity.Consultation;
 import com.nonier.cliniccore.entity.Message;
 import com.nonier.cliniccore.entity.User;
 import com.nonier.cliniccore.mapper.MessageMapper;
 import com.nonier.cliniccore.repository.MessageRepository;
+import com.nonier.cliniccore.service.AuthService;
 import com.nonier.cliniccore.service.MessageService;
 import com.nonier.cliniccore.service.NotificationService;
 import com.nonier.cliniccore.stomp.Notification;
@@ -16,6 +18,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,11 +31,14 @@ public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
     private final MessageMapper messageMapper;
     private final NotificationService notificationService;
+    private final AuthService authService;
 
     @Override
-    public Page<MessageDto> findAll(Pageable pageable) {
-        return messageRepository.findAll(pageable)
-                .map(messageMapper::message2MessageDto);
+    public List<MessageDto> findAll(Principal principal) {
+        return messageRepository.findAllByUser(authService.getUser(principal))
+                .stream()
+                .map(messageMapper::message2MessageDto)
+                .toList();
     }
 
 
@@ -43,13 +50,5 @@ public class MessageServiceImpl implements MessageService {
         notificationService.sendNotificationToUsers(new Notification<>(NotificationType.NEW_MESSAGE, messageDto),
                 message.getDialog());
         return messageDto;
-    }
-
-    @Override
-    public List<MessageDto> findAllByUser(User user) {
-        return messageRepository.findAllByUser(user)
-                .stream()
-                .map(messageMapper::message2MessageDto)
-                .toList();
     }
 }

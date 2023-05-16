@@ -1,10 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Doctor} from "../../model/Doctor";
 import {DoctorService} from "../../service/doctor.service";
 import {SpecializationService} from "../../service/specialization.service";
-import {ClientService} from "../../service/client.service";
 import {Specialization} from "../../model/Specialization";
 import {FormControl} from "@angular/forms";
+import {ConsultationService} from "../../service/consultation.service";
 
 @Component({
   selector: 'app-doctors-page',
@@ -19,7 +19,7 @@ export class DoctorsPageComponent implements OnInit {
   specializationsCtrl = new FormControl<Specialization[]>([]);
 
   constructor(private doctorService: DoctorService, private specializationService: SpecializationService,
-              private clientService: ClientService) {
+              private consultationService: ConsultationService) {
     this.getDoctors();
     this.getSpecializations();
   }
@@ -46,8 +46,6 @@ export class DoctorsPageComponent implements OnInit {
   }
 
   chooseConsultation(consultationId: number) {
-    this.clientService.chooseConsultation(consultationId);
+    this.consultationService.chooseConsultation(consultationId);
   }
-
-  protected readonly Specialization = Specialization;
 }

@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.List;
+
 @RestController
 @RequestMapping("/messages")
 @RequiredArgsConstructor
@@ -18,8 +21,8 @@ public class MessageController {
     public final MessageService messageService;
 
     @GetMapping
-    public ResponseEntity<Page<MessageDto>> findAll(Pageable pageable) {
-        return ResponseEntity.ok(messageService.findAll(pageable));
+    public ResponseEntity<List<MessageDto>> findAll(Principal principal) {
+        return ResponseEntity.ok(messageService.findAll(principal));
     }
 
     @PostMapping

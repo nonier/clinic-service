@@ -19,8 +19,8 @@ public class ConsultationController {
     private final ConsultationService consultationService;
 
     @GetMapping
-    public ResponseEntity<List<ConsultationDto>> findAll() {
-        return ResponseEntity.ok(consultationService.findAll());
+    public ResponseEntity<List<ConsultationDto>> findAll(Principal principal) {
+        return ResponseEntity.ok(consultationService.findAll(principal));
     }
 
     @GetMapping("/doctors/{doctorId}")
@@ -31,5 +31,12 @@ public class ConsultationController {
     @PostMapping
     public ResponseEntity<ConsultationDto> create(@Validated @RequestBody ConsultationUpdateDto dto) {
         return ResponseEntity.ok(consultationService.create(dto));
+    }
+
+    @PatchMapping("/{consultationId}/choose")
+    public ResponseEntity<Void> chooseConsultation(
+            @PathVariable Long consultationId, Principal principal) {
+        consultationService.chooseConsultation(consultationId, principal);
+        return ResponseEntity.ok().build();
     }
 }
